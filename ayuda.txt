@@ -1,0 +1,17 @@
+﻿	-o <outname>		Escribir el output a un archivo de texto llamado <outname>.
+	
+	-target <stage>		Donde <stage> es uno de: scan, parse, ast, semantic, irt, codegen; la compilación debe proceder hasta la etapa indicada. 
+				
+				Por ejemplo, si <stage> es scan, una instancia de scan debe ser creada imprimiendo en el archivo de salida "stage: scanning". 
+				
+				Si es parse una instancia de parser debe ser creada a partir de la instancia de scanner imprimiendo "stage: parsing", 
+				además del mensaje de scanner y así sucesivamente. 
+	
+	-opt <optimzation>	<optimization> es uno de: constant, algebraic; la compilación debe hacer solo la optimización que se le pida,
+				y debe imprimir como en -target "optimizing: constant folding" o "optimizing: algebraic simplification". 
+	
+	-debug <stage>		Imprimir información de debugging. Debe haber un mensaje por cada etapa listada en <stage> de la forma "Debugging <stage>". 
+				<stage> tiene las mismas opciones de -target, con la diferencia que se pueden "debuggear" varias etapas, 
+				separandolas con ':' de la forma scan:parse:etc.
+	
+	-h			Muestra esta ayuda al usuario.
