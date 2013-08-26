@@ -10,7 +10,7 @@ public class Algebraic {
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
-			escribir.write("Target:Algebraic\n");
+			escribir.write("Debug:Algebraic\n");
 			escribir.close();
 		} catch (IOException e) {
 			e.printStackTrace();

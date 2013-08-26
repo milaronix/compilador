@@ -10,7 +10,7 @@ public class ConstantFolding {
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
-			escribir.write("Target:Constant\n");
+			escribir.write("Debug:Constant\n");
 			escribir.close();
 		} catch (IOException e) {
 			e.printStackTrace();

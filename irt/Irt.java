@@ -8,12 +8,12 @@ import compiler.semantic.Semantic;
 
 public class Irt {
 
-	public Irt(File archivo){
-		Semantic semantic = new Semantic(archivo);
+	public Irt(String archivoEntrada, File archivo){
+		Semantic semantic = new Semantic(archivoEntrada, archivo);
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
-			escribir.write("Target:Irt\n");
+			escribir.write("Debug:Irt\n");
 			escribir.close();
 		} catch (IOException e) {
 			e.printStackTrace();

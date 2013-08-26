@@ -2,7 +2,6 @@
 //13000932 - 12002306
 //Seccion AN
 
-
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.File;
@@ -20,9 +19,10 @@ import compiler.semantic.Semantic;
 
 public class Compiler {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)  throws Exception{
 		File archivo = null;
 		FileWriter escribir = null;
+		String archivoEntrada = "";
 		
 		int target,opt,debug,o;
 		target=0;
@@ -37,6 +37,7 @@ public class Compiler {
 		oPos="";
 		
 		if(args[args.length-1].charAt(0)!='-'){
+			archivoEntrada = args[args.length-1];
 			for(int i=args.length-1;i>=0;i--){
 				if(args[i].equals("-o") && o==0){
 					o=1;
@@ -78,22 +79,22 @@ public class Compiler {
 		}
 		if(target==1){
 			if(targetPos.equals("scan")){
-				Scanner scan = new Scanner(archivo);
+				Scanner scan = new Scanner(archivoEntrada, archivo);
 			}
 			if(targetPos.equals("parse")){
-				CC4Parser parse = new CC4Parser(archivo);
+				CC4Parser parse = new CC4Parser(archivoEntrada, archivo);
 			}
 			if(targetPos.equals("ast")){
-				Ast ast = new Ast(archivo);
+				Ast ast = new Ast(archivoEntrada, archivo);
 			}
 			if(targetPos.equals("semantic")){
-				Semantic semantic = new Semantic(archivo);
+				Semantic semantic = new Semantic(archivoEntrada, archivo);
 			}
 			if(targetPos.equals("irt")){
-				Irt irt = new Irt(archivo);
+				Irt irt = new Irt(archivoEntrada, archivo);
 			}
 			if(targetPos.equals("codegen")){
-				Codegen codegen = new Codegen(archivo);
+				Codegen codegen = new Codegen(archivoEntrada, archivo);
 			}
 		}
 		if(opt==1){
@@ -121,8 +122,28 @@ public class Compiler {
 					
 				}
 			}
-			for(int i=0;i<contador;i++){
-				System.out.println("Target: "+stages[i]+"\n");
+			String[] orden = new String[6];
+			orden[0]="scan";
+			orden[1]="parse";
+			orden[2]="ast";
+			orden[3]="semantic";
+			orden[4]="irt";
+			orden[5]="codegen";
+			for ( int i = 0; i<6; i++ ){
+				if(targetPos == orden[i] || targetPos == ""){
+					int cont = 0;
+					boolean encontro = false;
+					while( (encontro == false) || (cont<6) ){
+						if ( stages[i] == orden[i] ){
+							encontro = true;
+						} else {
+							cont = cont + 1;
+						}
+					}
+					if (encontro){
+						System.out.println("Debug: "+stages[i]+"\n");
+					}
+				}
 			}
 		}
 		}else{

@@ -8,12 +8,12 @@ import compiler.ast.Ast;
 
 public class Semantic {
 
-	public Semantic(File archivo){
-		Ast ast = new Ast(archivo);
+	public Semantic(String archivoEntrada, File archivo) throws Exception{
+		Ast ast = new Ast(archivoEntrada, archivo);
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
-			escribir.write("Target:Semantic\n");
+			escribir.write("Debug:Semantic\n");
 			escribir.close();
 		} catch (IOException e) {
 			e.printStackTrace();

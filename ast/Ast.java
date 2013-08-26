@@ -8,12 +8,12 @@ import compiler.parser.CC4Parser;
 
 public class  Ast {
 
-	public Ast(File archivo){
-		CC4Parser parser = new CC4Parser(archivo);
+	public Ast(String archivoEntrada, File archivo) throws Exception{
+		CC4Parser parser = new CC4Parser(archivoEntrada, archivo);
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
-			escribir.write("Target:Ast\n");
+			escribir.write("Debug:Ast\n");
 			escribir.close();
 		} catch (IOException e) {
 			e.printStackTrace();
