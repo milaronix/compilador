@@ -7,8 +7,7 @@ import java.io.IOException;
 import org.antlr.v4.runtime.*;
 
 public class Scanner {
-
-	public Scanner(String archivoEntrada, File archivo) throws Exception{
+	public Scanner(String archivoEntrada, File archivo) {
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
@@ -19,7 +18,9 @@ public class Scanner {
 		}
 		try{
 			DecafLexer lexer = new DecafLexer(new ANTLRFileStream(archivoEntrada));
-			while (lexer.nextToken().getType() != Token.EOF);	
+			while (lexer.nextToken().getType() != Token.EOF){
+				System.out.println("Linea: "+lexer.getToken().getLine()+" Tipo: "+lexer.getToken().getType()+" Variable: "+lexer.getToken().getText());			
+			};	
 		}catch(ArrayIndexOutOfBoundsException aiobe){
 			System.err.println("Must provide a valid path to the filename with the tokens");
 			System.exit(1);

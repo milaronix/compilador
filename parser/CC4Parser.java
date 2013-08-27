@@ -8,6 +8,7 @@ import compiler.scanner.Scanner;
 import compiler.scanner.DecafLexer;
 
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 public class CC4Parser {
 
@@ -24,9 +25,12 @@ public class CC4Parser {
 		try{
 			DecafLexer lexer = new DecafLexer(new ANTLRFileStream(archivoEntrada));
 			CommonTokenStream ctsTokens = new CommonTokenStream (lexer);
+
 			DecafParser parser = new DecafParser(ctsTokens);
 			parser.program();
-			while (lexer.nextToken().getType() != Token.EOF);
+			System.out.println(parser.getTree().toStringTree());
+
+
 		}catch(ArrayIndexOutOfBoundsException aiobe){
 			System.err.println("Must provide a valid path to the filename with the tokens");
 			System.exit(1);
