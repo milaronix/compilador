@@ -8,8 +8,8 @@ import compiler.parser.CC4Parser;
 
 public class  Ast {
 
-	public Ast(String archivoEntrada, File archivo) throws Exception{
-		CC4Parser parser = new CC4Parser(archivoEntrada, archivo);
+	public Ast(String archivoEntrada, File archivo, int targeting, int encontroScan, int encontroParse, int encontroAST, int encontroSemantic, int encontroIRT, int encontroCodegen){
+		CC4Parser parser = new CC4Parser(archivoEntrada, archivo, targeting, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);

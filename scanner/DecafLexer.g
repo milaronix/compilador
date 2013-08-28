@@ -4,6 +4,16 @@ lexer grammar DecafLexer;
 	package compiler.scanner;
 }
 
+@members {
+    private IErrorReporter errorReporter = null;
+    public void setErrorReporter(IErrorReporter errorReporter) {
+        this.errorReporter = errorReporter;
+    }
+    public void emitErrorMessage(String msg) {
+        errorReporter.reportError(msg);
+    }
+}
+
 
 TYPE:		('int'|'boolean');
 ASSIGN_OP:	('='|'+='|'-=');

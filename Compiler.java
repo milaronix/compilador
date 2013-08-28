@@ -77,36 +77,9 @@ public class Compiler {
 				e.printStackTrace();
 			}
 		}
-		if(target==1){
-			if(targetPos.equals("scan")){
-				Scanner scan = new Scanner(archivoEntrada, archivo);
-			}
-			if(targetPos.equals("parse")){
-				CC4Parser parse = new CC4Parser(archivoEntrada, archivo);
-			}
-			if(targetPos.equals("ast")){
-				Ast ast = new Ast(archivoEntrada, archivo);
-			}
-			if(targetPos.equals("semantic")){
-				Semantic semantic = new Semantic(archivoEntrada, archivo);
-			}
-			if(targetPos.equals("irt")){
-				Irt irt = new Irt(archivoEntrada, archivo);
-			}
-			if(targetPos.equals("codegen")){
-				Codegen codegen = new Codegen(archivoEntrada, archivo);
-			}
-		}
-		if(opt==1){
-			if(optPos.equals("algebraic")){
-				Algebraic algebraic = new Algebraic(archivo);
-			}
-			if(optPos.equals("constant")){
-				ConstantFolding constant = new ConstantFolding(archivo);
-			}
-		}
+		String[] stages = new String[6];
+		stages[0]="";stages[1]="";stages[2]="";stages[3]="";stages[4]="";stages[5]="";
 		if(debug==1){
-			String[] stages = new String[6];
 			String s="";
 			int contador = 0;
 			for(int i=0;i<debugPos.length();i++){
@@ -122,28 +95,56 @@ public class Compiler {
 					
 				}
 			}
-			String[] orden = new String[6];
-			orden[0]="scan";
-			orden[1]="parse";
-			orden[2]="ast";
-			orden[3]="semantic";
-			orden[4]="irt";
-			orden[5]="codegen";
-			for ( int i = 0; i<6; i++ ){
-				if(targetPos == orden[i] || targetPos == ""){
-					int cont = 0;
-					boolean encontro = false;
-					while( (encontro == false) || (cont<6) ){
-						if ( stages[i] == orden[i] ){
-							encontro = true;
-						} else {
-							cont = cont + 1;
-						}
-					}
-					if (encontro){
-						System.out.println("Debug: "+stages[i]+"\n");
-					}
+		}
+		int encontroScan=0;int encontroParse=0;int encontroAST=0;int encontroSemantic=0;int encontroIRT=0;int encontroCodegen=0;
+			for(int i = 0; i<6; i++){
+				if (stages[i].equals("scan")){
+					encontroScan = 1;
 				}
+				if (stages[i].equals("parse")){
+					encontroParse = 1;
+				}
+				if (stages[i].equals("ast")){
+					encontroAST = 1;
+				}
+				if (stages[i].equals("semantic")){
+					encontroSemantic = 1;
+				}
+				if (stages[i].equals("irt")){
+					encontroIRT = 1;
+				}
+				if (stages[i].equals("codegen")){
+					encontroCodegen = 1;
+				}
+			}
+		if(target==1){
+			if(targetPos.equals("scan")){
+				Scanner scan = new Scanner(archivoEntrada, archivo, 1, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+			}
+			if(targetPos.equals("parse")){
+				CC4Parser parse = new CC4Parser(archivoEntrada, archivo, 1, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+			}
+			if(targetPos.equals("ast")){
+				Ast ast = new Ast(archivoEntrada, archivo, encontroScan, 1, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+			}
+			if(targetPos.equals("semantic")){
+				Semantic semantic = new Semantic(archivoEntrada, archivo, 1, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+			}
+			if(targetPos.equals("irt")){
+				Irt irt = new Irt(archivoEntrada, archivo, encontroScan, 1, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+			}
+			if(targetPos.equals("codegen")){
+				Codegen codegen = new Codegen(archivoEntrada, archivo, 1, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+			}
+		}else{
+			Codegen codegen = new Codegen(archivoEntrada, archivo, 0, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
+		}
+		if(opt==1){
+			if(optPos.equals("algebraic")){
+				Algebraic algebraic = new Algebraic(archivo);
+			}
+			if(optPos.equals("constant")){
+				ConstantFolding constant = new ConstantFolding(archivo);
 			}
 		}
 		}else{

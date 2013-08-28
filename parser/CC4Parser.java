@@ -12,8 +12,8 @@ import org.antlr.v4.runtime.tree.*;
 
 public class CC4Parser {
 
-	public CC4Parser(String archivoEntrada, File archivo) throws Exception{
-		Scanner scanner = new Scanner(archivoEntrada, archivo);
+	public CC4Parser(String archivoEntrada, File archivo, int targeting, int encontroScan, int encontroParse, int encontroAST, int encontroSemantic, int encontroIRT, int encontroCodegen){
+		Scanner scanner = new Scanner(archivoEntrada, archivo, targeting, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
 		FileWriter escribir;
 		try {
 			escribir = new FileWriter(archivo,true);
@@ -25,12 +25,12 @@ public class CC4Parser {
 		try{
 			DecafLexer lexer = new DecafLexer(new ANTLRFileStream(archivoEntrada));
 			CommonTokenStream ctsTokens = new CommonTokenStream (lexer);
-
 			DecafParser parser = new DecafParser(ctsTokens);
 			parser.program();
-			System.out.println(parser.getTree().toStringTree());
-
-
+			if(encontroParse == 1){
+				System.err.println("probando esto...");
+				
+			}
 		}catch(ArrayIndexOutOfBoundsException aiobe){
 			System.err.println("Must provide a valid path to the filename with the tokens");
 			System.exit(1);

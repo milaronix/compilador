@@ -7,14 +7,11 @@ lexer grammar DecafLexer;
 
 TYPE:		('int'|'boolean');
 ASSIGN_OP:	('='|'+='|'-=');
-
 ARITH_OP:	'+'|'-'|'*'|'/'|'%';
 REL_OP:		'<'|'>'|'<='|'>=';
 EQ_OP:		'=='|'!=';
 COND_OP:	'&&'|'||';
-
 RESERVADA:	(TYPE|'break'|'case'|'callout'|'continue'|'class'|'else'|'false'|'for'|'if'|'int'|'return'|'true'|'void') ;
-
 LITERAL:	INT_LITERAL | CHAR_LITERAL | BOOL_LITERAL;
 ID:		ALPHA ALPHA_NUM*;
 ALPHA_NUM:	ALPHA | DIGIT;
@@ -28,12 +25,9 @@ BOOL_LITERAL:	'true'|'false';
 CHAR_LITERAL:	'/'' CHAR '/'';
 STRING_LITERAL:	'"' CHAR* '"';
 CHAR:		('a'..'z'|'A'..'Z'|DIGIT) ;
-
 // lo que inventamos
 
 CLASE:		('class');
-
-
 SIMBOLOS:	('!'|'¡'|'?'|'¿'|'$'|'%'|'&');
 DIAG_INV:	'\\';
 PUNTO:		'.';

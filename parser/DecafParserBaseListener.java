@@ -1,6 +1,7 @@
-// Generated from compiler/parser/DecafParser.g by ANTLR 4.0
+// Generated from parser/DecafParser.g by ANTLR 4.0
 
 	package compiler.parser;
+	import org.antlr.v4.runtime.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
