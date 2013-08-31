@@ -18,22 +18,16 @@ public class CC4Parser {
 		try {
 			escribir = new FileWriter(archivo,true);
 			escribir.write("Debug:Parse\n");
-			escribir.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try{
 			DecafLexer lexer = new DecafLexer(new ANTLRFileStream(archivoEntrada));
 			CommonTokenStream ctsTokens = new CommonTokenStream (lexer);
 			DecafParser parser = new DecafParser(ctsTokens);
-			parser.program();
+			ParseTree tree = parser.program();
+			System.out.println(tree.toStringTree(parser));
 			if(encontroParse == 1){
-				System.err.println("probando esto...");
-				
+				System.out.println(tree.toStringTree(parser));				
 			}
-		}catch(ArrayIndexOutOfBoundsException aiobe){
-			System.err.println("Must provide a valid path to the filename with the tokens");
-			System.exit(1);
+			escribir.write(tree.toStringTree(parser));
+			escribir.close();
 		}catch(Exception e){
 			System.err.println("Must provide a valid path to the filename with the tokens");
 			System.exit(1);
