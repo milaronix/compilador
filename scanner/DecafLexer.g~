@@ -4,32 +4,21 @@ lexer grammar DecafLexer;
 	package compiler.scanner;
 }
 
-@members {
-    private IErrorReporter errorReporter = null;
-    public void setErrorReporter(IErrorReporter errorReporter) {
-        this.errorReporter = errorReporter;
-    }
-    public void emitErrorMessage(String msg) {
-        errorReporter.reportError(msg);
-    }
-}
-
-
 TYPE:		('int'|'boolean');
 ASSIGN_OP:	('='|'+='|'-=');
 ARITH_OP:	'+'|'-'|'*'|'/'|'%';
 REL_OP:		'<'|'>'|'<='|'>=';
 EQ_OP:		'=='|'!=';
 COND_OP:	'&&'|'||';
-RESERVADA:	(TYPE|'break'|'case'|'callout'|'continue'|'class'|'else'|'false'|'for'|'if'|'int'|'return'|'true'|'void') ;
+RESERVADA:	(TYPE|'break'|'case'|'callout'|'continue'|'class'|'else'|'false'|'for'|'if'|'int'|'return'|'true'|'void'|'program') ;
 LITERAL:	INT_LITERAL | CHAR_LITERAL | BOOL_LITERAL;
 ID:		ALPHA ALPHA_NUM*;
 ALPHA_NUM:	ALPHA | DIGIT;
 ALPHA:		('a'..'z'|'A'..'Z'|'_') ;
-DIGIT:		'0'..'9';
+DIGIT:		('0'..'9');
 HEX_DIGIT:	DIGIT|'a'..'f'|'A'..'F';
 INT_LITERAL:	DECIMAL_LITERAL|HEX_LITERAL;
-DECIMAL_LITERAL:DIGIT (DIGIT)*;
+DECIMAL_LITERAL:(DIGIT)+;
 HEX_LITERAL:	'0x' HEX_DIGIT (HEX_DIGIT)*;
 BOOL_LITERAL:	'true'|'false';
 CHAR_LITERAL:	'/'' CHAR '/'';

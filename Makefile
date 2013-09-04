@@ -27,7 +27,7 @@ CC4Parser.class: CC4Parser.java
 DecafParser.g:
 	echo DecafParser.g
 
-DecafParser.java: DecafParser.g
+DecafParser.java: DecafParser.class
 	java -jar /usr/local/lib/antlr-4.0-complete.jar parser/DecafParser.g -lib scanner/
 
 DecafParser.class: DecafParser.java
