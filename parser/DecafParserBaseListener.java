@@ -40,6 +40,9 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterVar_decl(DecafParser.Var_declContext ctx) { }
 	@Override public void exitVar_decl(DecafParser.Var_declContext ctx) { }
 
+	@Override public void enterComentario(DecafParser.ComentarioContext ctx) { }
+	@Override public void exitComentario(DecafParser.ComentarioContext ctx) { }
+
 	@Override public void enterMethod_decl(DecafParser.Method_declContext ctx) { }
 	@Override public void exitMethod_decl(DecafParser.Method_declContext ctx) { }
 

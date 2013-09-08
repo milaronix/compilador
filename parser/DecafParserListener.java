@@ -37,6 +37,9 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterVar_decl(DecafParser.Var_declContext ctx);
 	void exitVar_decl(DecafParser.Var_declContext ctx);
 
+	void enterComentario(DecafParser.ComentarioContext ctx);
+	void exitComentario(DecafParser.ComentarioContext ctx);
+
 	void enterMethod_decl(DecafParser.Method_declContext ctx);
 	void exitMethod_decl(DecafParser.Method_declContext ctx);
 }

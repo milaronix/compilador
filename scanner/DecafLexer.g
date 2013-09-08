@@ -21,16 +21,18 @@ INT_LITERAL:	DECIMAL_LITERAL|HEX_LITERAL;
 DECIMAL_LITERAL:(DIGIT)+;
 HEX_LITERAL:	'0x' HEX_DIGIT (HEX_DIGIT)*;
 BOOL_LITERAL:	'true'|'false';
-CHAR_LITERAL:	'/'' CHAR '/'';
+CHAR_LITERAL:	'\'' CHAR '\'';
 STRING_LITERAL:	'"' CHAR* '"';
 CHAR:		('a'..'z'|'A'..'Z'|DIGIT) ;
 // lo que inventamos
 
 CLASE:		('class');
 SIMBOLOS:	('!'|'¡'|'?'|'¿'|'$'|'%'|'&');
+D_DIAG:		'//';
 DIAG_INV:	'\\';
 PUNTO:		'.';
 COMILLAS:	'"';
+COMILLA:	'\'';
 A_LLAVE:	('{');
 C_LLAVE:	('}');
 A_PARENTESIS:	('(');

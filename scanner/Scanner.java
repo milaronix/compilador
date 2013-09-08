@@ -16,9 +16,9 @@ public class Scanner {
 			DecafLexer lexer = new DecafLexer(new ANTLRFileStream(archivoEntrada));
 			while (lexer.nextToken().getType() != Token.EOF){
 				if(encontroScan == 1){
-					System.out.println("Linea: "+lexer.getToken().getLine()+" Tipo: "+lexer.ruleNames[lexer.getToken().getType()-1]+" Variable: "+lexer.getToken().getText()+"\n");	
+					System.out.println("Linea: "+lexer.getToken().getLine()+" Tipo: "+lexer.ruleNames[lexer.getToken().getType()-1]+" Token: "+lexer.getToken().getText()+"\n");	
 				}
-				escribir.write("Linea: "+lexer.getToken().getLine()+" Tipo: "+lexer.ruleNames[lexer.getToken().getType()-1]+" Variable: "+lexer.getToken().getText()+"\n");		
+				escribir.write("Linea: "+lexer.getToken().getLine()+" Tipo: "+lexer.ruleNames[lexer.getToken().getType()-1]+" Token: "+lexer.getToken().getText()+"\n");		
 			};
 			//*****************************************************************************
 			escribir.close();	
