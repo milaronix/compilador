@@ -22,7 +22,6 @@ public class CC4Parser {
 			CommonTokenStream ctsTokens = new CommonTokenStream (lexer);
 			DecafParser parser = new DecafParser(ctsTokens);
 			ParseTree tree = parser.program();
-			System.out.println(tree.toStringTree(parser));
 			if(encontroParse == 1){
 				System.out.println(tree.toStringTree(parser));				
 			}
