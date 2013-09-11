@@ -43,8 +43,8 @@ public class  Ast {
 		ParseTree tree = parser_.program();
 		ASTVisitor visitor = new ASTVisitor();
 		Root root = (Root)visitor.visit(tree);
-		root.print1();
-		//root.print("");
+		System.out.println(root == null);
+		root.print();
 	}
 	
 }

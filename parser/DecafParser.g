@@ -10,7 +10,7 @@ options{
 	tokenVocab = DecafLexer;
 }
 
-program:	(D_DIAG CHAR*)* (RESERVADA ID A_LLAVE (field_decl | method_decl)* C_LLAVE) #algo;
+program:	(D_DIAG CHAR*)* (RESERVADA ID A_LLAVE (field_decl | method_decl)* C_LLAVE);
 
 field_decl:	(TYPE (ID | ID A_CORCHETE LITERAL C_CORCHETE) ((ID | ID A_CORCHETE INT_LITERAL C_CORCHETE) COMA)* PYCOMA) ;
 

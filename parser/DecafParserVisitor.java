@@ -49,11 +49,11 @@ public interface DecafParserVisitor<T> extends ParseTreeVisitor<T> {
 
 	T visitMeca_pyc(DecafParser.Meca_pycContext ctx);
 
-	T visitAlgo(DecafParser.AlgoContext ctx);
-
 	T visitMe_ex(DecafParser.Me_exContext ctx);
 
 	T visitArith_op(DecafParser.Arith_opContext ctx);
+
+	T visitProgram(DecafParser.ProgramContext ctx);
 
 	T visitEq_op(DecafParser.Eq_opContext ctx);
 

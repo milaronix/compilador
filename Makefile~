@@ -1,11 +1,7 @@
-make: Compiler.class Scanner.class DecafLexer.java DecafLexer.class CC4Parser.java DecafParser.java ast/*.class ejecuta
-
-Compiler.class: Compiler.java
-	javac Compiler.java
+make: Scanner.class DecafLexer.java DecafLexer.class CC4Parser.java DecafParser.java basevisitor.java ast/*.class Compiler.class ejecuta
 
 Scanner.java:
 	echo scanner
-
 Scanner.class: Scanner.java
 	javac scanner/Scanner.java
 
@@ -33,11 +29,18 @@ DecafParser.java: DecafParser.class
 DecafParser.class: DecafParser.java
 	javac parser/DecafParser.java
 
+basevisitor.java: basevisitor.class
+	java -jar /usr/local/lib/antlr-4.0-complete.jar -visitor -lib scanner/ parser/DecafParser.g
+
 ast/*.class: ast/*.java
 	javac ast/*.java
+
+Compiler.class: Compiler.java
+	javac Compiler.java
 
 ejecuta:
 	java Compiler -target ast -debug scan:parse:ast prueba.txt
 
 clean:
 	rm *.class
+	rm ast/*.class

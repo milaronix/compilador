@@ -50,11 +50,11 @@ public class DecafParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 
 	@Override public T visitMeca_pyc(DecafParser.Meca_pycContext ctx) { return visitChildren(ctx); }
 
-	@Override public T visitAlgo(DecafParser.AlgoContext ctx) { return visitChildren(ctx); }
-
 	@Override public T visitMe_ex(DecafParser.Me_exContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitArith_op(DecafParser.Arith_opContext ctx) { return visitChildren(ctx); }
+
+	@Override public T visitProgram(DecafParser.ProgramContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitEq_op(DecafParser.Eq_opContext ctx) { return visitChildren(ctx); }
 

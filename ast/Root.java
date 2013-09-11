@@ -20,7 +20,7 @@ public class Root extends Node{
 			n.print(padding + "\t");
 		}
 	}
-	public void print1(){
+	public void print(){
 		System.out.println("entro");
 		//print("");
 	}

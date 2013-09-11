@@ -73,14 +73,14 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterMeca_pyc(DecafParser.Meca_pycContext ctx) { }
 	@Override public void exitMeca_pyc(DecafParser.Meca_pycContext ctx) { }
 
-	@Override public void enterAlgo(DecafParser.AlgoContext ctx) { }
-	@Override public void exitAlgo(DecafParser.AlgoContext ctx) { }
-
 	@Override public void enterMe_ex(DecafParser.Me_exContext ctx) { }
 	@Override public void exitMe_ex(DecafParser.Me_exContext ctx) { }
 
 	@Override public void enterArith_op(DecafParser.Arith_opContext ctx) { }
 	@Override public void exitArith_op(DecafParser.Arith_opContext ctx) { }
+
+	@Override public void enterProgram(DecafParser.ProgramContext ctx) { }
+	@Override public void exitProgram(DecafParser.ProgramContext ctx) { }
 
 	@Override public void enterEq_op(DecafParser.Eq_opContext ctx) { }
 	@Override public void exitEq_op(DecafParser.Eq_opContext ctx) { }

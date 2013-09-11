@@ -70,14 +70,14 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterMeca_pyc(DecafParser.Meca_pycContext ctx);
 	void exitMeca_pyc(DecafParser.Meca_pycContext ctx);
 
-	void enterAlgo(DecafParser.AlgoContext ctx);
-	void exitAlgo(DecafParser.AlgoContext ctx);
-
 	void enterMe_ex(DecafParser.Me_exContext ctx);
 	void exitMe_ex(DecafParser.Me_exContext ctx);
 
 	void enterArith_op(DecafParser.Arith_opContext ctx);
 	void exitArith_op(DecafParser.Arith_opContext ctx);
+
+	void enterProgram(DecafParser.ProgramContext ctx);
+	void exitProgram(DecafParser.ProgramContext ctx);
 
 	void enterEq_op(DecafParser.Eq_opContext ctx);
 	void exitEq_op(DecafParser.Eq_opContext ctx);
