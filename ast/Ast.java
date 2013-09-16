@@ -41,10 +41,28 @@ public class  Ast {
 		CommonTokenStream ctsTokens = new CommonTokenStream (lexer);
 		DecafParser parser_ = new DecafParser(ctsTokens);
 		ParseTree tree = parser_.program();
-		ASTVisitor visitor = new ASTVisitor();
+		printTree(tree,0);
+		/*ASTVisitor visitor = new ASTVisitor();
 		Root root = (Root)visitor.visit(tree);
 		System.out.println(root == null);
-		root.print();
+		root.print();*/
 	}
+	public static void printTree(ParseTree t, int indent) {
+		if ( t != null ) {
+			Root raiz = new Root();
+			StringBuffer sb = new StringBuffer(indent);
+			for ( int i = 0; i < indent; i++ ) 
+				sb = sb.append("   "); 
+			for ( int i = 0; i < t.getChildCount(); i++ ){
+				if (!(t.getChild(i).toString().equals(";")) && !(t.getChild(i).toString().equals("(")) && !(t.getChild(i).toString().equals(")")) && !(t.getChild(i).toString().equals("{")) && !(t.getChild(i).toString().equals("}")) && !(t.getChild(i).toString().equals(","))){
+					Node nodo = new Node();
+					nodo.setData(t.getChild(i).toString());
+					nodo.setParent(t.getParent(i));
+					System.out.println(sb.toString() + t.getChild(i).toString()); 
+					printTree((ParseTree)t.getChild(i), indent+1); 
+				}
+			} 
+		}
+ 	}
 	
 }

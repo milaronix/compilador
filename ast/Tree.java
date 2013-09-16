@@ -19,12 +19,11 @@ import java.util.LinkedList;
 	}
 }*/ 
 
-
 public class Tree<T> {
-    private Node<T> root;
+    private Node<T> raiz;
 
-    public Tree(T rootData) {
-        root = new Node<T>();
-        root.data = rootData;
+    public Tree() {
+        raiz = new Node<T>();
+        root.setData = rootData;
         root.children = new ArrayList<Node<T>>();
 }

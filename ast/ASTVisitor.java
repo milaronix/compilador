@@ -17,6 +17,7 @@ public class ASTVisitor extends DecafParserBaseVisitor<Node>{
 	public Node visitProgram(DecafParser.ProgramContext ctx) {
 		System.out.println("\n"+ctx.getText());
 		System.out.println(ctx.getParent().toStringTree());
+		//System.out.println(visit(e));
 		return new Root();
 	}
 }
