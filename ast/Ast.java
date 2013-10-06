@@ -57,7 +57,7 @@ public class  Ast {
 
 		printTree(tree,0);
 
-		System.out.println("***************************************");
+		System.out.println("*****************SIMBOLOS********************");
 		for(int i = 0; i< tablaSimbolos.size(); i++){
 			simbolo coso;
 			coso = (simbolo) tablaSimbolos.get(i);
@@ -118,19 +118,9 @@ public class  Ast {
 					astTree.add(nodo2);
 
 					String palabra2;
-					if(palabra == "var_decl"){
-						if (t.getChild(i).getChild(i).toString().charAt(0) == '['){
-							String numStr2 = "";
-							numStr2 = numStr2 + t.getChild(i).getChild(i).toString().charAt(1);
-							numStr2 = numStr2 + t.getChild(i).getChild(i).toString().charAt(2);
-							if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
-								numStr2 = numStr2 + t.getChild(i).getChild(i).toString().charAt(3);							}
-							palabra2 = tabla.get(Integer.parseInt(numStr2)).toString();
-						}else{
-							palabra2 = t.getChild(i).getChild(i).toString();
-						}
+					if((palabra == "var_decl") || (palabra == "method_decl")){
 						simbolo sim = new simbolo();
-						sim.nombre = palabra2;
+						sim.nombre = t.getChild(i).getChild(1).toString();
 						sim.tipo = t.getChild(i).getChild(0).toString();
 						sim.largo = 0;
 						sim.parametros = null;
