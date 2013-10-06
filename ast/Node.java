@@ -1,9 +1,12 @@
 package compiler.ast;
 
-public static class Node<T> {
+import org.antlr.v4.runtime.tree.*;
+
+public class Node {
 
 	private String data;
-        private Node<T> parent;
+	private String type;
+        private Tree parent;
 
 	public void setData(String datos){
 		data = datos;	
@@ -13,11 +16,19 @@ public static class Node<T> {
 		return data;	
 	}
 
-	public void setParent(Node<t> papa){
+	public void setType(String tipo){
+		type = tipo;	
+	}
+
+	public String getType(){
+		return type;	
+	}
+
+	public void setParent(Tree papa){
 		parent = papa;	
 	}
 
-	public Node<t> getParent(){
+	public Tree getParent(){
 		return parent;	
 	}
 }

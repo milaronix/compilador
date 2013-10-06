@@ -29,6 +29,9 @@ DecafParser.java: DecafParser.class
 DecafParser.class: DecafParser.java
 	javac parser/DecafParser.java
 
+basevisitor.class:
+	echo 'para visitor'
+
 basevisitor.java: basevisitor.class
 	java -jar /usr/local/lib/antlr-4.0-complete.jar -visitor -lib scanner/ parser/DecafParser.g
 

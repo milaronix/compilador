@@ -1,7 +1,7 @@
 // Generated from parser/DecafParser.g by ANTLR 4.0
 
-	package compiler.parser;
-	import org.antlr.v4.runtime.*;
+package compiler.parser;
+import org.antlr.v4.runtime.*;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;

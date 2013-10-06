@@ -1,0 +1,195 @@
+package compiler.ast;
+ 
+import java.util.List;
+import org.antlr.v4.runtime.tree.TerminalNode;
+import compiler.parser.DecafParser;
+import compiler.parser.DecafParserBaseVisitor;
+ 
+public class AstVisitor extends DecafParserBaseVisitor<Node>{
+
+	public List<Node> list = new ArrayList<Node>();
+
+	public void crea_tabla(){
+		tabla.put(40, "method_decl");
+		tabla.put(86, "block");
+		tabla.put(95, "statement");
+		tabla.put(119, "method_call");
+		tabla.put(89, "var_decl");
+		tabla.put(114, "location");
+		tabla.put(116, "expr");	
+		tabla.put(124, "callout");		
+	}
+
+	public crearNodo(String datos, String tipo, Tree papa){
+		Node nodo = new Node();
+		nodo.setData(datos);
+		nodo.setType(tipo);
+		nodo.setParent(papa);
+		list.add(nodo);	
+	}
+	
+	public verifica (String palabra){
+		crearNodo("program", "programa", null);
+		crearNodo(t.getChild(0).toString(),"RESERVADA",t.getParent());
+		crearNodo(t.getChild(1).toString(),"ID",t.getParent());
+		for(int i = 3; i<t.getChildCount()-2; i++){
+			if(t.getChild(i).toString().equals("field_decl1")){
+				visitField_decl1((ParseTree)t.getChild(i));	
+			}
+			if(t.getChild(i).toString().equals("field_decl2")){
+				visitField_decl2((ParseTree)t.getChild(i));	
+			}
+			if(t.getChild(i)toString().equals("field_decl3")){
+				visitField_decl3((ParseTree)t.getChild(i));	
+			}
+			if(t.getChild(i).toString().equals("method_decl1")){
+				visitMethod_decl1((ParseTree)t.getChild(i));	
+			}
+			if(t.getChild(i).toString().equals("method_decl2")){
+				visitMethod_decl2((ParseTree)t.getChild(i));	
+			}
+		}
+	}
+
+	void visitLocation_(){
+		
+	}
+
+	void visitCon_parametros(){
+
+	}
+
+	void visitLo_assop_ex_pyc(){
+
+	}
+
+	void visitId_ac_exp_cc(){
+
+	}
+
+	void visitAd_ex(){
+
+	}
+
+	void visitStr_lit(){
+
+	}
+
+	void visitBlock(){
+
+	}
+
+	void visitRe_ap_ex_cp_blo(){
+
+	}
+
+	void visitRe(){
+
+	}
+
+	void visitRel_op(){
+
+	}
+
+	void visitId(){
+
+	}
+
+	void visitAp_ex_cp(){
+
+	}
+
+	void visitEx_bo_ex(){
+
+	}
+
+	void visitCond_op(){
+
+	}
+
+	void visitMethod_decl1(t){
+		crearNodo("method_decl", "metodo", t.getParent());
+		crearNodo(t.getChild(0).toString(),"TYPE",t.getParent());
+		crearNodo(t.getChild(1).toString(),"ID",t.getParent());
+
+		crearNodo(t.getChild(3).toString(),"TYPE",t.getParent());
+		crearNodo(t.getChild(4).toString(),"ID",t.getParent());
+
+		int cont = 5
+
+		visitBlock((ParseTree)t.getChild());	
+	}
+
+	void visitMethod_decl2(){
+
+	}
+
+	void visitBlo(){
+
+	}
+
+	void visitEx(){
+
+	}
+
+	void visitMethod_call_(){
+
+	}
+
+	void visitReturn(){
+
+	}
+
+	void visitVar_decl(){
+
+	}
+
+	void visitComentario(){
+
+	}
+
+	void visitField_decl3(t){
+		crearNodo("field_decl", "field_dcl", t.getParent());
+		crearNodo(t.getChild(0).toString(),"TYPE",t.getParent());
+		crearNodo(t.getChild(1).toString(),"ID",t.getParent());
+		crearNodo(t.getChild(2).toString(),"INT_LITERAL",t.getParent());
+	}
+
+	void visitMeca_pyc(){
+
+	}
+
+	void visitMe_ex(){
+
+	}
+
+	void visitArith_op(){
+
+	}
+
+	void visitField_decl2(t){
+		crearNodo("field_decl", "field_dcl", t.getParent());
+		crearNodo(t.getChild(0).toString(),"TYPE",t.getParent());
+		crearNodo(t.getChild(1).toString(),"ID",t.getParent());
+		crearNodo(t.getChild(3).toString(),"LITERAL",t.getParent());
+	}
+
+	void visitField_decl1(t){
+		crearNodo("field_decl", "field_dcl", t.getParent());
+		crearNodo(t.getChild(0).toString(),"TYPE",t.getParent());
+		crearNodo(t.getChild(1).toString(),"ID",t.getParent());
+	}
+
+	void visitEq_op(){
+
+	}
+
+	void visitRe_id_ig_ex_co_ex_blo(){
+
+	}
+
+	void visitLiteral(){
+
+	}
+
+}

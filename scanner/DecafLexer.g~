@@ -12,7 +12,7 @@ EQ_OP:		'=='|'!=';
 COND_OP:	'&&'|'||';
 RESERVADA:	(TYPE|'break'|'case'|'callout'|'continue'|'class'|'else'|'false'|'for'|'if'|'int'|'return'|'true'|'void'|'program') ;
 HEX_LITERAL:	'0x' HEX_DIGIT (HEX_DIGIT)*;
-LITERAL:	INT_LITERAL | CHAR_LITERAL | BOOL_LITERAL
+LITERAL:	INT_LITERAL | CHAR_LITERAL | BOOL_LITERAL;
 ID:		ALPHA ALPHA_NUM*;
 ALPHA_NUM:	ALPHA | DIGIT;
 ALPHA:		('a'..'z'|'A'..'Z'|'_') ;
