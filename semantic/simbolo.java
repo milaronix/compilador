@@ -6,13 +6,17 @@ import java.io.IOException;
 
 import compiler.ast.Ast;
 
+import java.util.List;
+import java.util.*;
+import java.util.ArrayList;
+
 public class simbolo {
 
 	public String nombre;
 	public String tipo;
 	public int largo;
-	public simbolo padre;
-	public String[] parametros;
+	public String padre;
+	public List<String> parametros;
 	
 	/*public void setNombre(String name){
 		nombre = name;

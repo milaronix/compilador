@@ -61,28 +61,26 @@ public class  Ast {
 		for(int i = 0; i< tablaSimbolos.size(); i++){
 			simbolo coso;
 			coso = (simbolo) tablaSimbolos.get(i);
-			System.out.println(coso.nombre + " " + coso.tipo);
+			System.out.println("Nombre " + coso.nombre + " Tipo " + coso.tipo + " Largo "  + coso.largo + " Parametros " + coso.parametros + " Papa " + coso.padre);
 		}
 	}
 
 	public void crea_tabla(){
-		tabla.put(40, "method_decl");
-		tabla.put(86, "block");
-		tabla.put(148, "block");
-		tabla.put(126, "block");
-		tabla.put(95, "statement");
-		tabla.put(119, "method_call");
-		tabla.put(89, "var_decl");
-		tabla.put(114, "location");
-		tabla.put(177, "location");
-		tabla.put(116, "expr");	
-		tabla.put(124, "callout");
-		tabla.put(39, "field_decl");
-		tabla.put(187, "bin_op");
-		tabla.put(153, "exp_literal");
-		tabla.put(16, "op");
-		tabla.put(188, "exp_int");	
-		tabla.put(128, "block");	
+		tabla.put(46, "method_decl");
+		tabla.put(75, "block");
+		tabla.put(85, "statement");
+		tabla.put(114, "statement");
+		tabla.put(16, "operation");
+		tabla.put(167, "exp");
+		tabla.put(177, "op");
+		tabla.put(178, "exp");
+		tabla.put(116, "var_decl");
+		tabla.put(79, "field_decl");
+		tabla.put(104, "assign");
+		tabla.put(106, "op");
+		tabla.put(118, "block");
+		tabla.put(78, "var_decl");
+		//tabla.put(, "");
 	}
 
 	public void printTree(ParseTree t, int indent) {
@@ -95,7 +93,7 @@ public class  Ast {
 				if (!(t.getChild(i).toString().equals(";")) && !(t.getChild(i).toString().equals("(")) && !(t.getChild(i).toString().equals(")")) && !(t.getChild(i).toString().equals("{")) && !(t.getChild(i).toString().equals("}")) && !(t.getChild(i).toString().equals(","))){
 					String palabra = "";
 					crea_tabla();					
-					if (t.getChild(i).toString().charAt(0) == '['){
+					if ((t.getChild(i).toString().charAt(0) == '[') && (t.getChild(i).toString().length()>1)){
 						String numStr = "";
 						numStr = numStr + t.getChild(i).toString().charAt(1);
 						numStr = numStr + t.getChild(i).toString().charAt(2);
@@ -107,7 +105,7 @@ public class  Ast {
 					}else{
 						palabra = t.getChild(i).toString();
 					}
-
+					//palabra = t.getChild(i).toString();
 					System.out.println(sb.toString() + palabra); 
 					printTree((ParseTree)t.getChild(i), indent+1); 
 
@@ -117,14 +115,32 @@ public class  Ast {
 					nodo2.setType(null);
 					astTree.add(nodo2);
 
-					String palabra2;
-					if((palabra == "var_decl") || (palabra == "method_decl")){
-						simbolo sim = new simbolo();
-						sim.nombre = t.getChild(i).getChild(1).toString();
-						sim.tipo = t.getChild(i).getChild(0).toString();
-						sim.largo = 0;
-						sim.parametros = null;
-						tablaSimbolos.add(sim);
+					if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "method_decl") ){
+						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
+							simbolo sim = new simbolo();
+							sim.nombre = t.getChild(i).getChild(1).toString();
+							sim.tipo = t.getChild(i).getChild(0).toString();
+	
+							if(t.getChild(i).getChild(2).toString().equals("[")){
+								sim.largo = Integer.parseInt(t.getChild(i).getChild(3).toString());
+							}else{
+								sim.largo = 0;
+							}
+
+							sim.padre = t.getChild(i).toString();
+
+							if(t.getChild(i).getChildCount()>2){
+								List<String> parametros = new ArrayList<String>();
+								for(int j=3; j<(t.getChild(i).getChildCount()-2); j = j + 3){
+									parametros.add(t.getChild(i).getChild(j).toString());
+								}
+								sim.parametros = parametros;
+							}else{
+								sim.parametros = null;
+							}
+
+							tablaSimbolos.add(sim);
+						}
 					}
 				}
 			} 

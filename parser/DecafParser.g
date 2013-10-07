@@ -10,13 +10,13 @@ options{
 tokenVocab = DecafLexer;
 }
 
-program: (D_DIAG CHAR*)* (RESERVADA ID A_LLAVE (field_decl | method_decl)* C_LLAVE);
+program: (D_DIAG CHAR*)* (RESERVADA ID A_LLAVE (var_decl | field_decl)* (method_decl)* C_LLAVE);
 
-field_decl: (TYPE (ID | (ID A_CORCHETE LITERAL C_CORCHETE) | (ID A_CORCHETE INT_LITERAL C_CORCHETE COMA)) PYCOMA) ;
+field_decl: TYPE ID A_CORCHETE LITERAL C_CORCHETE PYCOMA;
 
-method_decl: (TYPE | RESERVADA) ID A_PARENTESIS ((TYPE ID)+ (TYPE ID COMA)*)* C_PARENTESIS block;
+method_decl: (TYPE | RESERVADA) ID A_PARENTESIS ((TYPE ID) | (TYPE ID COMA))* C_PARENTESIS block;
 
-block: A_LLAVE var_decl* statement* C_LLAVE ;
+block: A_LLAVE (var_decl | field_decl)* statement* C_LLAVE ;
  
 var_decl: TYPE ID (COMA ID)* PYCOMA;
 
