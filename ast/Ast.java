@@ -21,6 +21,7 @@ public class  Ast {
 	public Hashtable tabla = new Hashtable(); 
 	public LinkedList astTree = new LinkedList();	
 	public LinkedList tablaSimbolos = new LinkedList();
+	public LinkedList variables = new LinkedList();
 
 	public Ast(String archivoEntrada, File archivo, int targeting, int encontroScan, int encontroParse, int encontroAST, int encontroSemantic, int encontroIRT, int encontroCodegen){
 		CC4Parser parser = new CC4Parser(archivoEntrada, archivo, targeting, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
@@ -114,6 +115,19 @@ public class  Ast {
 					nodo2.setParent(t.getParent());
 					nodo2.setType(null);
 					astTree.add(nodo2);
+
+					if(palabra == "assign"){
+						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
+							variablesMetodos vm = new variablesMetodos();
+							vm.nombre = t.getChild(i).getChild(1).toString();
+							vm.tipo = t.getChild(i).getChild(0).toString();
+							for ( int a = 2; a < t.getChild(i).getChildCount(); a++ ){
+								vm.recibe = vm.recibe + t.getChild(i).getChild(a).toString();
+							}
+							vm.padre = t.getChild(i).toString();
+							variables.add(vm);
+						}
+					}
 
 					if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "method_decl") ){
 						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
