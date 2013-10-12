@@ -77,16 +77,16 @@ public class  Ast {
 	public void crea_tabla(){
 		tabla.put(46, "method_decl");
 		tabla.put(75, "block");
-		tabla.put(85, "statement");
-		tabla.put(114, "statement");
+		tabla.put(85, "statement_");
+		tabla.put(114, "statement__");
 		tabla.put(16, "operation");
-		tabla.put(167, "exp");
-		tabla.put(177, "op");
+		tabla.put(167, "location");
+		tabla.put(177, "bin op");
 		tabla.put(178, "exp");
-		tabla.put(116, "var_decl");
+		tabla.put(116, "block");
 		tabla.put(79, "field_decl");
-		tabla.put(104, "assign");
-		tabla.put(106, "op");
+		tabla.put(104, "location");
+		tabla.put(106, "expresion");
 		tabla.put(118, "block");
 		tabla.put(138, "block");
 		tabla.put(78, "var_decl");
@@ -109,7 +109,7 @@ public class  Ast {
 						numStr = numStr + t.getChild(i).toString().charAt(2);
 						if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
 							numStr = numStr + t.getChild(i).toString().charAt(3);						}
-						//System.out.println(numStr); //da el numero de la hash
+						System.out.println(numStr); //da el numero de la hash
 						palabra = tabla.get(Integer.parseInt(numStr)).toString();
 						
 					}else{
@@ -125,7 +125,7 @@ public class  Ast {
 					nodo2.setType(null);
 					astTree.add(nodo2);
 
-					if(palabra == "assign"){
+					if(palabra == "statement"){
 						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
 							variablesMetodos vm = new variablesMetodos();
 							vm.setNombre(t.getChild(i).getChild(1).toString());
@@ -152,7 +152,7 @@ public class  Ast {
 
 							sim.setPadre(t.getChild(i).toString());
 							
-							if( (t.getChild(i).getChildCount()>2) && (t.getChild(i).getChild(2).toString().charAt(0) != '[') ){
+							if( (t.getChild(i).getChildCount()>3) && (t.getChild(i).getChild(2).toString().charAt(0) != '[') ){
 								List<String> parametros = new ArrayList<String>();
 								for(int j=3; j<(t.getChild(i).getChildCount()-2); j = j + 3){
 									simbolo sim2 = new simbolo();
