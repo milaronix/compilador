@@ -45,7 +45,7 @@ Compiler.class: Compiler.java
 	javac Compiler.java
 
 ejecuta:
-	java Compiler -target ast -debug scan:parse:ast prueba.txt
+	java Compiler -target semantic -debug scan:parse:ast:semantic prueba.txt
 
 clean:
 	rm *.class

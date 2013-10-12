@@ -12,10 +12,50 @@ import java.util.ArrayList;
 
 public class variablesMetodos {
 
-	public String nombre;
-	public String tipo;
-	public String recibe;
-	public String padre;
-	public List<String> parametros;
+	private String nombre;
+	private String tipo;
+	private String recibe;
+	private String padre;
+	private List<String> parametros;
 
+	public void setNombre(String name){
+		nombre = name;
+	}
+	
+	public String getNombre(){
+		return nombre;
+	}
+
+	public void setTipo(String type){
+		tipo = type;
+	}
+	
+	public String getTipo(){
+		return tipo;
+	}
+
+	public void setRecibe(String get){
+		recibe = get;
+	}
+	
+	public String getRecibe(){
+		return recibe;
+	}
+
+	public void setPadre(String parent){
+		padre = parent;
+	}
+	
+	public String getPadre(){
+		return padre;
+	}
+
+	public void setParametros(List<String> parameters){
+		parametros = parameters;
+	}
+	
+	public List<String> getParametros(){
+		return parametros;
+	}
+	
 }

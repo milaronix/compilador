@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 public class simbolo {
 
-	public String nombre;
-	public String tipo;
-	public int largo;
-	public String padre;
-	public List<String> parametros;
+	private String nombre;
+	private String tipo;
+	private int largo;
+	private String padre;
+	private List<String> parametros;
 	
-	/*public void setNombre(String name){
+	public void setNombre(String name){
 		nombre = name;
 	}
 	
@@ -42,20 +42,20 @@ public class simbolo {
 		return largo;
 	}
 
-	public void setPadre(simbolo parent){
+	public void setPadre(String parent){
 		padre = parent;
 	}
 	
-	public simbolo getPadre(){
+	public String getPadre(){
 		return padre;
 	}
 
-	public void setParametros(String[] parameters){
+	public void setParametros(List<String> parameters){
 		parametros = parameters;
 	}
 	
-	public String[] getParametros(){
+	public List<String> getParametros(){
 		return parametros;
-	}*/
+	}
 	
 }

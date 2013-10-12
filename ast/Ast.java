@@ -20,8 +20,16 @@ public class  Ast {
 	public String arch;
 	public Hashtable tabla = new Hashtable(); 
 	public LinkedList astTree = new LinkedList();	
-	public LinkedList tablaSimbolos = new LinkedList();
-	public LinkedList variables = new LinkedList();
+	private LinkedList<simbolo> tablaSimbolos = new LinkedList<simbolo>();
+	private LinkedList<variablesMetodos> variables = new LinkedList<variablesMetodos>();
+
+	public LinkedList<simbolo> getTablaSimbolos(){
+		return tablaSimbolos;
+	}
+
+	public LinkedList<variablesMetodos> getVariables(){
+		return variables;
+	}
 
 	public Ast(String archivoEntrada, File archivo, int targeting, int encontroScan, int encontroParse, int encontroAST, int encontroSemantic, int encontroIRT, int encontroCodegen){
 		CC4Parser parser = new CC4Parser(archivoEntrada, archivo, targeting, encontroScan, encontroParse, encontroAST, encontroSemantic, encontroIRT, encontroCodegen);
@@ -62,7 +70,7 @@ public class  Ast {
 		for(int i = 0; i< tablaSimbolos.size(); i++){
 			simbolo coso;
 			coso = (simbolo) tablaSimbolos.get(i);
-			System.out.println("Nombre " + coso.nombre + " Tipo " + coso.tipo + " Largo "  + coso.largo + " Parametros " + coso.parametros + " Papa " + coso.padre);
+			System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Largo "  + coso.getLargo() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre());
 		}
 	}
 
@@ -80,6 +88,7 @@ public class  Ast {
 		tabla.put(104, "assign");
 		tabla.put(106, "op");
 		tabla.put(118, "block");
+		tabla.put(138, "block");
 		tabla.put(78, "var_decl");
 		//tabla.put(, "");
 	}
@@ -100,7 +109,7 @@ public class  Ast {
 						numStr = numStr + t.getChild(i).toString().charAt(2);
 						if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
 							numStr = numStr + t.getChild(i).toString().charAt(3);						}
-						//System.out.println(numStr); //da el numero de la hash
+						System.out.println(numStr); //da el numero de la hash
 						palabra = tabla.get(Integer.parseInt(numStr)).toString();
 						
 					}else{
@@ -119,12 +128,12 @@ public class  Ast {
 					if(palabra == "assign"){
 						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
 							variablesMetodos vm = new variablesMetodos();
-							vm.nombre = t.getChild(i).getChild(1).toString();
-							vm.tipo = t.getChild(i).getChild(0).toString();
+							vm.setNombre(t.getChild(i).getChild(1).toString());
+							vm.setTipo(t.getChild(i).getChild(0).toString());
 							for ( int a = 2; a < t.getChild(i).getChildCount(); a++ ){
-								vm.recibe = vm.recibe + t.getChild(i).getChild(a).toString();
+								vm.setRecibe(vm.getRecibe() + t.getChild(i).getChild(a).toString());
 							}
-							vm.padre = t.getChild(i).toString();
+							vm.setPadre(t.getChild(i).toString());
 							variables.add(vm);
 						}
 					}
@@ -132,25 +141,25 @@ public class  Ast {
 					if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "method_decl") ){
 						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
 							simbolo sim = new simbolo();
-							sim.nombre = t.getChild(i).getChild(1).toString();
-							sim.tipo = t.getChild(i).getChild(0).toString();
+							sim.setNombre(t.getChild(i).getChild(1).toString());
+							sim.setTipo(t.getChild(i).getChild(0).toString());
 	
 							if(t.getChild(i).getChild(2).toString().equals("[")){
-								sim.largo = Integer.parseInt(t.getChild(i).getChild(3).toString());
+								sim.setLargo(Integer.parseInt(t.getChild(i).getChild(3).toString()));
 							}else{
-								sim.largo = 0;
+								sim.setLargo(0);
 							}
 
-							sim.padre = t.getChild(i).toString();
+							sim.setPadre(t.getChild(i).toString());
 
 							if(t.getChild(i).getChildCount()>2){
 								List<String> parametros = new ArrayList<String>();
 								for(int j=3; j<(t.getChild(i).getChildCount()-2); j = j + 3){
 									parametros.add(t.getChild(i).getChild(j).toString());
 								}
-								sim.parametros = parametros;
+								sim.setParametros(parametros);
 							}else{
-								sim.parametros = null;
+								sim.setParametros(null);
 							}
 
 							tablaSimbolos.add(sim);
