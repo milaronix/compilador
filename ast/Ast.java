@@ -109,7 +109,7 @@ public class  Ast {
 						numStr = numStr + t.getChild(i).toString().charAt(2);
 						if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
 							numStr = numStr + t.getChild(i).toString().charAt(3);						}
-						System.out.println(numStr); //da el numero de la hash
+						//System.out.println(numStr); //da el numero de la hash
 						palabra = tabla.get(Integer.parseInt(numStr)).toString();
 						
 					}else{
@@ -151,10 +151,16 @@ public class  Ast {
 							}
 
 							sim.setPadre(t.getChild(i).toString());
-
-							if(t.getChild(i).getChildCount()>2){
+							
+							if( (t.getChild(i).getChildCount()>2) && (t.getChild(i).getChild(2).toString().charAt(0) != '[') ){
 								List<String> parametros = new ArrayList<String>();
 								for(int j=3; j<(t.getChild(i).getChildCount()-2); j = j + 3){
+									simbolo sim2 = new simbolo();
+									sim2.setNombre(t.getChild(i).getChild(j+1).toString());
+									sim2.setTipo(t.getChild(i).getChild(j).toString());
+									sim2.setLargo(0);
+									sim2.setPadre(t.getChild(i).getChild(1).toString());
+									tablaSimbolos.add(sim2);
 									parametros.add(t.getChild(i).getChild(j).toString());
 								}
 								sim.setParametros(parametros);

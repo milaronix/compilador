@@ -33,19 +33,23 @@ public class Semantic {
 	}
 
 	public boolean polimorfos (List<String> uno, List<String> dos){
-		if( uno.size() != dos.size() ){
+		if( uno == null || dos == null){
 			return true;
 		}else{
-			boolean salir = false;
-			int pos = 0;
-			while ( ( salir == false ) && ( pos < uno.size() ) ) {
-				if( !(uno.get(pos).equals(dos.get(pos))) ){
-					salir = true;
-				}else{
-					pos = pos + 1;
+			if( uno.size() != dos.size() ){
+				return true;
+			}else{
+				boolean salir = false;
+				int pos = 0;
+				while ( ( salir == false ) && ( pos < uno.size() ) ) {
+					if( !(uno.get(pos).equals(dos.get(pos))) ){
+						salir = true;
+					}else{
+						pos = pos + 1;
+					}
 				}
+				return salir;
 			}
-			return salir;
 		}
 	}
 
