@@ -16,12 +16,13 @@ field_decl: TYPE ID A_CORCHETE LITERAL C_CORCHETE PYCOMA;
 
 method_decl: (TYPE | RESERVADA) ID A_PARENTESIS ((TYPE ID) | (TYPE ID COMA))* C_PARENTESIS block;
 
-block: A_LLAVE (var_decl | field_decl)* statement* C_LLAVE ;
+block: A_LLAVE (var_decl | field_decl)* (statement | assign)* C_LLAVE ;
  
 var_decl: TYPE ID (COMA ID)* PYCOMA;
 
-statement: location ASSIGN_OP expr PYCOMA #lo_assop_ex_pyc
-|method_call PYCOMA #meca_pyc
+assign: location ASSIGN_OP expr PYCOMA;
+
+statement: method_call PYCOMA #meca_pyc
 |RESERVADA A_PARENTESIS expr C_PARENTESIS block (RESERVADA block)* #re_ap_ex_cp_blo
 |RESERVADA ID IGUAL expr COMA expr block #re_id_ig_ex_co_ex_blo
 |RESERVADA A_CORCHETE expr C_CORCHETE #re_ac_ex_cc

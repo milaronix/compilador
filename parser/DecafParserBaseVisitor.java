@@ -12,7 +12,7 @@ public class DecafParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 
 	@Override public T visitCon_parametros(DecafParser.Con_parametrosContext ctx) { return visitChildren(ctx); }
 
-	@Override public T visitLo_assop_ex_pyc(DecafParser.Lo_assop_ex_pycContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssign(DecafParser.AssignContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitId_ac_exp_cc(DecafParser.Id_ac_exp_ccContext ctx) { return visitChildren(ctx); }
 

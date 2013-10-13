@@ -11,7 +11,7 @@ public interface DecafParserVisitor<T> extends ParseTreeVisitor<T> {
 
 	T visitCon_parametros(DecafParser.Con_parametrosContext ctx);
 
-	T visitLo_assop_ex_pyc(DecafParser.Lo_assop_ex_pycContext ctx);
+	T visitAssign(DecafParser.AssignContext ctx);
 
 	T visitId_ac_exp_cc(DecafParser.Id_ac_exp_ccContext ctx);
 

@@ -72,14 +72,37 @@ public class  Ast {
 			coso = (simbolo) tablaSimbolos.get(i);
 			System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Largo "  + coso.getLargo() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre());
 		}
+
+		System.out.println("");
+
+		System.out.println("*****************VARIABLES*******************");
+		for(int i = 0; i< variables.size(); i++){
+			variablesMetodos coso;
+			coso = (variablesMetodos) variables.get(i);
+			System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Recibe "  + coso.getRecibe() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre());
+		}
+
 	}
 
 	public void crea_tabla(){
-		tabla.put(46, "method_decl");
-		tabla.put(75, "block");
-		tabla.put(85, "statement_");
-		tabla.put(114, "statement__");
-		tabla.put(16, "operation");
+		tabla.put(48, "method_decl");
+		tabla.put(77, "block");
+		tabla.put(81, "field_decl");
+		tabla.put(87, "statement_");
+		tabla.put(117, "expr");
+		tabla.put(170, "location");
+		tabla.put(180, "bin_op");
+		tabla.put(181, "exp");
+		tabla.put(119, "block");
+		tabla.put(80, "var_decl");
+		tabla.put(88, "assign");
+		tabla.put(107, "location");
+		tabla.put(109, "location");
+		tabla.put(141, "block");
+
+
+		tabla.put(114, "statement");
+		tabla.put(18, "operation");
 		tabla.put(167, "location");
 		tabla.put(177, "bin op");
 		tabla.put(178, "exp");
@@ -125,14 +148,21 @@ public class  Ast {
 					nodo2.setType(null);
 					astTree.add(nodo2);
 
-					if(palabra == "statement"){
+					if(palabra == "assign"){
 						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
 							variablesMetodos vm = new variablesMetodos();
-							vm.setNombre(t.getChild(i).getChild(1).toString());
-							vm.setTipo(t.getChild(i).getChild(0).toString());
-							for ( int a = 2; a < t.getChild(i).getChildCount(); a++ ){
-								vm.setRecibe(vm.getRecibe() + t.getChild(i).getChild(a).toString());
-							}
+							
+							vm.setTipo(null);
+							String id = "";
+							String recibe = "";
+							String operacion = t.getChild(i).getText();
+
+							int index = operacion.indexOf('=');
+							id = operacion.substring(0,index);
+							recibe = operacion.substring(index+1,operacion.length()-1);
+
+							vm.setNombre(id);
+							vm.setRecibe(recibe);
 							vm.setPadre(t.getChild(i).toString());
 							variables.add(vm);
 						}

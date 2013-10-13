@@ -71,7 +71,7 @@ public class Semantic {
 					}
 				}
 			//Revision de variables
-			for ( int i = 0; i < ast.getVariables().size(); i++){
+			/*for ( int i = 0; i < ast.getVariables().size(); i++){
 				boolean encontro = false;
 				for ( int l = 0; l < ast.getTablaSimbolos().size(); l++ ){
 					if ( ast.getVariables().get(i).getNombre().equals( ast.getTablaSimbolos().get(l).getNombre() ) ){
@@ -84,7 +84,7 @@ public class Semantic {
 				if ( encontro == false ){
 					System.out.println("ERROR: La variable "+ ast.getVariables().get(i).getNombre() +" no ha sido declarada.");
 				}						
-			}
+			}*/
 			//Revision de llamadas a metodos
  	}
 	

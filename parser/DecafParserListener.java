@@ -13,8 +13,8 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterCon_parametros(DecafParser.Con_parametrosContext ctx);
 	void exitCon_parametros(DecafParser.Con_parametrosContext ctx);
 
-	void enterLo_assop_ex_pyc(DecafParser.Lo_assop_ex_pycContext ctx);
-	void exitLo_assop_ex_pyc(DecafParser.Lo_assop_ex_pycContext ctx);
+	void enterAssign(DecafParser.AssignContext ctx);
+	void exitAssign(DecafParser.AssignContext ctx);
 
 	void enterId_ac_exp_cc(DecafParser.Id_ac_exp_ccContext ctx);
 	void exitId_ac_exp_cc(DecafParser.Id_ac_exp_ccContext ctx);

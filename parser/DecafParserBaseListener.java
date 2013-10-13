@@ -16,8 +16,8 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterCon_parametros(DecafParser.Con_parametrosContext ctx) { }
 	@Override public void exitCon_parametros(DecafParser.Con_parametrosContext ctx) { }
 
-	@Override public void enterLo_assop_ex_pyc(DecafParser.Lo_assop_ex_pycContext ctx) { }
-	@Override public void exitLo_assop_ex_pyc(DecafParser.Lo_assop_ex_pycContext ctx) { }
+	@Override public void enterAssign(DecafParser.AssignContext ctx) { }
+	@Override public void exitAssign(DecafParser.AssignContext ctx) { }
 
 	@Override public void enterId_ac_exp_cc(DecafParser.Id_ac_exp_ccContext ctx) { }
 	@Override public void exitId_ac_exp_cc(DecafParser.Id_ac_exp_ccContext ctx) { }
