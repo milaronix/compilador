@@ -133,7 +133,11 @@ public class  Ast {
 						if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
 							numStr = numStr + t.getChild(i).toString().charAt(3);						}
 						System.out.println(numStr); //da el numero de la hash
-						palabra = tabla.get(Integer.parseInt(numStr)).toString();
+						if (tabla.get(Integer.parseInt(numStr)) == null ){
+							palabra = "---block---";
+						}else{
+							palabra = tabla.get(Integer.parseInt(numStr)).toString();
+						}
 						
 					}else{
 						palabra = t.getChild(i).toString();

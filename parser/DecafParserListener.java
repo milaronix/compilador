@@ -28,9 +28,6 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterBlock(DecafParser.BlockContext ctx);
 	void exitBlock(DecafParser.BlockContext ctx);
 
-	void enterRe(DecafParser.ReContext ctx);
-	void exitRe(DecafParser.ReContext ctx);
-
 	void enterRe_ap_ex_cp_blo(DecafParser.Re_ap_ex_cp_bloContext ctx);
 	void exitRe_ap_ex_cp_blo(DecafParser.Re_ap_ex_cp_bloContext ctx);
 
@@ -40,11 +37,11 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterId(DecafParser.IdContext ctx);
 	void exitId(DecafParser.IdContext ctx);
 
+	void enterBlock_(DecafParser.Block_Context ctx);
+	void exitBlock_(DecafParser.Block_Context ctx);
+
 	void enterAp_ex_cp(DecafParser.Ap_ex_cpContext ctx);
 	void exitAp_ex_cp(DecafParser.Ap_ex_cpContext ctx);
-
-	void enterRe_ac_ex_cc(DecafParser.Re_ac_ex_ccContext ctx);
-	void exitRe_ac_ex_cc(DecafParser.Re_ac_ex_ccContext ctx);
 
 	void enterEx_bo_ex(DecafParser.Ex_bo_exContext ctx);
 	void exitEx_bo_ex(DecafParser.Ex_bo_exContext ctx);
@@ -52,14 +49,14 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterCond_op(DecafParser.Cond_opContext ctx);
 	void exitCond_op(DecafParser.Cond_opContext ctx);
 
-	void enterBlo(DecafParser.BloContext ctx);
-	void exitBlo(DecafParser.BloContext ctx);
-
 	void enterEx(DecafParser.ExContext ctx);
 	void exitEx(DecafParser.ExContext ctx);
 
 	void enterMethod_call_(DecafParser.Method_call_Context ctx);
 	void exitMethod_call_(DecafParser.Method_call_Context ctx);
+
+	void enterReturn(DecafParser.ReturnContext ctx);
+	void exitReturn(DecafParser.ReturnContext ctx);
 
 	void enterVar_decl(DecafParser.Var_declContext ctx);
 	void exitVar_decl(DecafParser.Var_declContext ctx);
@@ -69,6 +66,9 @@ public interface DecafParserListener extends ParseTreeListener {
 
 	void enterMeca_pyc(DecafParser.Meca_pycContext ctx);
 	void exitMeca_pyc(DecafParser.Meca_pycContext ctx);
+
+	void enterBreak_o_continue(DecafParser.Break_o_continueContext ctx);
+	void exitBreak_o_continue(DecafParser.Break_o_continueContext ctx);
 
 	void enterMe_ex(DecafParser.Me_exContext ctx);
 	void exitMe_ex(DecafParser.Me_exContext ctx);

@@ -53,6 +53,23 @@ public class Semantic {
 		}
 	}
 
+	/*public String buscarTipo(String var, String papa){
+		
+	}
+
+	/*public boolean mismoBloque(String var, String papa){
+		mt = false;
+		int pos = 0;
+		while( ( mt == false ) && ( pos < ast.getTablaSimbolos() ) ){
+			if( var == ast.getTablaSimbolos().get(pos).getNombre() ){
+				if( papa == ast.getTablaSimbolos().get(pos).getPadre() ){
+					mt = true;
+				}
+			}
+		}
+		return mt;
+	}*/
+
 	public void revision() {
 			//Revision de polimorfismo
 				for ( int j = 0; j < ast.getTablaSimbolos().size(); j++ ){

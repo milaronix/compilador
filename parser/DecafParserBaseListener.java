@@ -31,9 +31,6 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterBlock(DecafParser.BlockContext ctx) { }
 	@Override public void exitBlock(DecafParser.BlockContext ctx) { }
 
-	@Override public void enterRe(DecafParser.ReContext ctx) { }
-	@Override public void exitRe(DecafParser.ReContext ctx) { }
-
 	@Override public void enterRe_ap_ex_cp_blo(DecafParser.Re_ap_ex_cp_bloContext ctx) { }
 	@Override public void exitRe_ap_ex_cp_blo(DecafParser.Re_ap_ex_cp_bloContext ctx) { }
 
@@ -43,11 +40,11 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterId(DecafParser.IdContext ctx) { }
 	@Override public void exitId(DecafParser.IdContext ctx) { }
 
+	@Override public void enterBlock_(DecafParser.Block_Context ctx) { }
+	@Override public void exitBlock_(DecafParser.Block_Context ctx) { }
+
 	@Override public void enterAp_ex_cp(DecafParser.Ap_ex_cpContext ctx) { }
 	@Override public void exitAp_ex_cp(DecafParser.Ap_ex_cpContext ctx) { }
-
-	@Override public void enterRe_ac_ex_cc(DecafParser.Re_ac_ex_ccContext ctx) { }
-	@Override public void exitRe_ac_ex_cc(DecafParser.Re_ac_ex_ccContext ctx) { }
 
 	@Override public void enterEx_bo_ex(DecafParser.Ex_bo_exContext ctx) { }
 	@Override public void exitEx_bo_ex(DecafParser.Ex_bo_exContext ctx) { }
@@ -55,14 +52,14 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterCond_op(DecafParser.Cond_opContext ctx) { }
 	@Override public void exitCond_op(DecafParser.Cond_opContext ctx) { }
 
-	@Override public void enterBlo(DecafParser.BloContext ctx) { }
-	@Override public void exitBlo(DecafParser.BloContext ctx) { }
-
 	@Override public void enterEx(DecafParser.ExContext ctx) { }
 	@Override public void exitEx(DecafParser.ExContext ctx) { }
 
 	@Override public void enterMethod_call_(DecafParser.Method_call_Context ctx) { }
 	@Override public void exitMethod_call_(DecafParser.Method_call_Context ctx) { }
+
+	@Override public void enterReturn(DecafParser.ReturnContext ctx) { }
+	@Override public void exitReturn(DecafParser.ReturnContext ctx) { }
 
 	@Override public void enterVar_decl(DecafParser.Var_declContext ctx) { }
 	@Override public void exitVar_decl(DecafParser.Var_declContext ctx) { }
@@ -72,6 +69,9 @@ public class DecafParserBaseListener implements DecafParserListener {
 
 	@Override public void enterMeca_pyc(DecafParser.Meca_pycContext ctx) { }
 	@Override public void exitMeca_pyc(DecafParser.Meca_pycContext ctx) { }
+
+	@Override public void enterBreak_o_continue(DecafParser.Break_o_continueContext ctx) { }
+	@Override public void exitBreak_o_continue(DecafParser.Break_o_continueContext ctx) { }
 
 	@Override public void enterMe_ex(DecafParser.Me_exContext ctx) { }
 	@Override public void exitMe_ex(DecafParser.Me_exContext ctx) { }

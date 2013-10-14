@@ -25,9 +25,9 @@ assign: location ASSIGN_OP expr PYCOMA;
 statement: method_call PYCOMA #meca_pyc
 |RESERVADA A_PARENTESIS expr C_PARENTESIS block (RESERVADA block)* #re_ap_ex_cp_blo
 |RESERVADA ID IGUAL expr COMA expr block #re_id_ig_ex_co_ex_blo
-|RESERVADA A_CORCHETE expr C_CORCHETE #re_ac_ex_cc
-|RESERVADA #re
-|block #blo
+|RESERVADA (expr)* PYCOMA #return
+|RESERVADA #break_o_continue
+|block #block_
 ;
 
 method_call: (ID A_PARENTESIS (expr ?COMA)* C_PARENTESIS) #con_parametros
