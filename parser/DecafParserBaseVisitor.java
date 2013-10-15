@@ -32,17 +32,29 @@ public class DecafParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 
 	@Override public T visitAp_ex_cp(DecafParser.Ap_ex_cpContext ctx) { return visitChildren(ctx); }
 
+	@Override public T visitCond_op_2(DecafParser.Cond_op_2Context ctx) { return visitChildren(ctx); }
+
+	@Override public T visitCond_op_1(DecafParser.Cond_op_1Context ctx) { return visitChildren(ctx); }
+
 	@Override public T visitEx_bo_ex(DecafParser.Ex_bo_exContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitCond_op(DecafParser.Cond_opContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitEx(DecafParser.ExContext ctx) { return visitChildren(ctx); }
 
+	@Override public T visitEq_op_(DecafParser.Eq_op_Context ctx) { return visitChildren(ctx); }
+
 	@Override public T visitMethod_call_(DecafParser.Method_call_Context ctx) { return visitChildren(ctx); }
 
 	@Override public T visitReturn(DecafParser.ReturnContext ctx) { return visitChildren(ctx); }
 
+	@Override public T visitRel_op_(DecafParser.Rel_op_Context ctx) { return visitChildren(ctx); }
+
+	@Override public T visitBin_op_2(DecafParser.Bin_op_2Context ctx) { return visitChildren(ctx); }
+
 	@Override public T visitVar_decl(DecafParser.Var_declContext ctx) { return visitChildren(ctx); }
+
+	@Override public T visitBin_op_1(DecafParser.Bin_op_1Context ctx) { return visitChildren(ctx); }
 
 	@Override public T visitComentario(DecafParser.ComentarioContext ctx) { return visitChildren(ctx); }
 

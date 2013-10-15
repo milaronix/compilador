@@ -43,6 +43,12 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterAp_ex_cp(DecafParser.Ap_ex_cpContext ctx);
 	void exitAp_ex_cp(DecafParser.Ap_ex_cpContext ctx);
 
+	void enterCond_op_2(DecafParser.Cond_op_2Context ctx);
+	void exitCond_op_2(DecafParser.Cond_op_2Context ctx);
+
+	void enterCond_op_1(DecafParser.Cond_op_1Context ctx);
+	void exitCond_op_1(DecafParser.Cond_op_1Context ctx);
+
 	void enterEx_bo_ex(DecafParser.Ex_bo_exContext ctx);
 	void exitEx_bo_ex(DecafParser.Ex_bo_exContext ctx);
 
@@ -52,14 +58,26 @@ public interface DecafParserListener extends ParseTreeListener {
 	void enterEx(DecafParser.ExContext ctx);
 	void exitEx(DecafParser.ExContext ctx);
 
+	void enterEq_op_(DecafParser.Eq_op_Context ctx);
+	void exitEq_op_(DecafParser.Eq_op_Context ctx);
+
 	void enterMethod_call_(DecafParser.Method_call_Context ctx);
 	void exitMethod_call_(DecafParser.Method_call_Context ctx);
 
 	void enterReturn(DecafParser.ReturnContext ctx);
 	void exitReturn(DecafParser.ReturnContext ctx);
 
+	void enterRel_op_(DecafParser.Rel_op_Context ctx);
+	void exitRel_op_(DecafParser.Rel_op_Context ctx);
+
+	void enterBin_op_2(DecafParser.Bin_op_2Context ctx);
+	void exitBin_op_2(DecafParser.Bin_op_2Context ctx);
+
 	void enterVar_decl(DecafParser.Var_declContext ctx);
 	void exitVar_decl(DecafParser.Var_declContext ctx);
+
+	void enterBin_op_1(DecafParser.Bin_op_1Context ctx);
+	void exitBin_op_1(DecafParser.Bin_op_1Context ctx);
 
 	void enterComentario(DecafParser.ComentarioContext ctx);
 	void exitComentario(DecafParser.ComentarioContext ctx);

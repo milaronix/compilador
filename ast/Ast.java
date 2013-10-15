@@ -97,6 +97,7 @@ public class  Ast {
 		tabla.put(117, "expr");
 		tabla.put(173, "location");
 		tabla.put(183, "bin_op");
+		tabla.put(189, "bin_op");
 		tabla.put(184, "exp");
 		tabla.put(119, "block");
 		tabla.put(80, "var_decl");
@@ -106,6 +107,8 @@ public class  Ast {
 		tabla.put(141, "block");
 		tabla.put(18, "exp");
 		tabla.put(136, "exp");
+		tabla.put(187, "exp");
+		tabla.put(190, "exp");
 		tabla.put(41, "var_global_decl");
 		tabla.put(42, "var_global_decl");
 		//tabla.put(, "");

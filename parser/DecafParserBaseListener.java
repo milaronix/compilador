@@ -46,6 +46,12 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterAp_ex_cp(DecafParser.Ap_ex_cpContext ctx) { }
 	@Override public void exitAp_ex_cp(DecafParser.Ap_ex_cpContext ctx) { }
 
+	@Override public void enterCond_op_2(DecafParser.Cond_op_2Context ctx) { }
+	@Override public void exitCond_op_2(DecafParser.Cond_op_2Context ctx) { }
+
+	@Override public void enterCond_op_1(DecafParser.Cond_op_1Context ctx) { }
+	@Override public void exitCond_op_1(DecafParser.Cond_op_1Context ctx) { }
+
 	@Override public void enterEx_bo_ex(DecafParser.Ex_bo_exContext ctx) { }
 	@Override public void exitEx_bo_ex(DecafParser.Ex_bo_exContext ctx) { }
 
@@ -55,14 +61,26 @@ public class DecafParserBaseListener implements DecafParserListener {
 	@Override public void enterEx(DecafParser.ExContext ctx) { }
 	@Override public void exitEx(DecafParser.ExContext ctx) { }
 
+	@Override public void enterEq_op_(DecafParser.Eq_op_Context ctx) { }
+	@Override public void exitEq_op_(DecafParser.Eq_op_Context ctx) { }
+
 	@Override public void enterMethod_call_(DecafParser.Method_call_Context ctx) { }
 	@Override public void exitMethod_call_(DecafParser.Method_call_Context ctx) { }
 
 	@Override public void enterReturn(DecafParser.ReturnContext ctx) { }
 	@Override public void exitReturn(DecafParser.ReturnContext ctx) { }
 
+	@Override public void enterRel_op_(DecafParser.Rel_op_Context ctx) { }
+	@Override public void exitRel_op_(DecafParser.Rel_op_Context ctx) { }
+
+	@Override public void enterBin_op_2(DecafParser.Bin_op_2Context ctx) { }
+	@Override public void exitBin_op_2(DecafParser.Bin_op_2Context ctx) { }
+
 	@Override public void enterVar_decl(DecafParser.Var_declContext ctx) { }
 	@Override public void exitVar_decl(DecafParser.Var_declContext ctx) { }
+
+	@Override public void enterBin_op_1(DecafParser.Bin_op_1Context ctx) { }
+	@Override public void exitBin_op_1(DecafParser.Bin_op_1Context ctx) { }
 
 	@Override public void enterComentario(DecafParser.ComentarioContext ctx) { }
 	@Override public void exitComentario(DecafParser.ComentarioContext ctx) { }

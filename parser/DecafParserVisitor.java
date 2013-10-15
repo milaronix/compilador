@@ -31,17 +31,29 @@ public interface DecafParserVisitor<T> extends ParseTreeVisitor<T> {
 
 	T visitAp_ex_cp(DecafParser.Ap_ex_cpContext ctx);
 
+	T visitCond_op_2(DecafParser.Cond_op_2Context ctx);
+
+	T visitCond_op_1(DecafParser.Cond_op_1Context ctx);
+
 	T visitEx_bo_ex(DecafParser.Ex_bo_exContext ctx);
 
 	T visitCond_op(DecafParser.Cond_opContext ctx);
 
 	T visitEx(DecafParser.ExContext ctx);
 
+	T visitEq_op_(DecafParser.Eq_op_Context ctx);
+
 	T visitMethod_call_(DecafParser.Method_call_Context ctx);
 
 	T visitReturn(DecafParser.ReturnContext ctx);
 
+	T visitRel_op_(DecafParser.Rel_op_Context ctx);
+
+	T visitBin_op_2(DecafParser.Bin_op_2Context ctx);
+
 	T visitVar_decl(DecafParser.Var_declContext ctx);
+
+	T visitBin_op_1(DecafParser.Bin_op_1Context ctx);
 
 	T visitComentario(DecafParser.ComentarioContext ctx);
 
