@@ -6,7 +6,8 @@ lexer grammar DecafLexer;
 
 TYPE:		('int'|'boolean');
 ASSIGN_OP:	('='|'+='|'-=');
-ARITH_OP:	'+'|'-'|'*'|'/'|'%';
+ARITH_OP_2:	'+'|'-'|'%';
+ARITH_OP_1:	'*'|'/';
 REL_OP:		'<'|'>'|'<='|'>=';
 EQ_OP:		'=='|'!=';
 COND_OP:	'&&'|'||';

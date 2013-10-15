@@ -40,6 +40,8 @@ location: ID #id
 expr: location #location_
 |method_call #method_call_
 |LITERAL #literal
+|expr ARITH_OP_1 expr #ex_bo_ex
+|expr ARITH_OP_2 expr #ex_bo_ex
 |expr bin_op expr #ex_bo_ex
 |MENOS expr #me_ex
 |ADMIRACION expr #ad_ex

@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.*;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 public class  Ast {
 
 	public String arch;
@@ -90,35 +95,24 @@ public class  Ast {
 		tabla.put(81, "field_decl");
 		tabla.put(87, "statement_");
 		tabla.put(117, "expr");
-		tabla.put(170, "location");
-		tabla.put(180, "bin_op");
-		tabla.put(181, "exp");
+		tabla.put(173, "location");
+		tabla.put(183, "bin_op");
+		tabla.put(184, "exp");
 		tabla.put(119, "block");
 		tabla.put(80, "var_decl");
 		tabla.put(88, "assign");
 		tabla.put(107, "location");
 		tabla.put(109, "location");
 		tabla.put(141, "block");
-
-
-		tabla.put(114, "statement");
-		tabla.put(18, "operation");
-		tabla.put(167, "location");
-		tabla.put(177, "bin op");
-		tabla.put(178, "exp");
-		tabla.put(116, "block");
-		tabla.put(79, "field_decl");
-		tabla.put(104, "location");
-		tabla.put(106, "expresion");
-		tabla.put(118, "block");
-		tabla.put(138, "block");
-		tabla.put(78, "var_decl");
+		tabla.put(18, "exp");
+		tabla.put(136, "exp");
+		tabla.put(41, "var_global_decl");
+		tabla.put(42, "var_global_decl");
 		//tabla.put(, "");
 	}
 
 	public void printTree(ParseTree t, int indent) {
 		if ( t != null ) {
-
 			StringBuffer sb = new StringBuffer(indent);
 			for ( int i = 0; i < indent; i++ ) 
 				sb = sb.append("   "); 
@@ -133,6 +127,15 @@ public class  Ast {
 						if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
 							numStr = numStr + t.getChild(i).toString().charAt(3);						}
 						System.out.println(numStr); //da el numero de la hash
+						/*try{
+							BufferedReader reader = new BufferedReader(new FileReader("/parser/DecafParser.java"));
+							String line = null;
+							while ((line = reader.readLine()) != null) {
+							    // ...
+							}
+						}catch(Exception e){
+							System.out.println("Error al leer");
+						}*/
 						if (tabla.get(Integer.parseInt(numStr)) == null ){
 							palabra = "---block---";
 						}else{

@@ -53,14 +53,15 @@ public class Semantic {
 		}
 	}
 
-	/*public String buscarTipo(String var, String papa){
+	public String buscarTipo(String var, String papa){
+		return "int";
 		
 	}
 
-	/*public boolean mismoBloque(String var, String papa){
-		mt = false;
+	public boolean mismoBloque(String var, String papa){
+		boolean mt = false;
 		int pos = 0;
-		while( ( mt == false ) && ( pos < ast.getTablaSimbolos() ) ){
+		while( ( mt == false ) && ( pos < ast.getTablaSimbolos().size() ) ){
 			if( var == ast.getTablaSimbolos().get(pos).getNombre() ){
 				if( papa == ast.getTablaSimbolos().get(pos).getPadre() ){
 					mt = true;
@@ -68,7 +69,7 @@ public class Semantic {
 			}
 		}
 		return mt;
-	}*/
+	}
 
 	public void revision() {
 			//Revision de polimorfismo
