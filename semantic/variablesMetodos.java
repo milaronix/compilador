@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class variablesMetodos {
 
 	private String nombre;
+	private Boolean encontro;
 	private String tipo;
 	private String recibe;
 	private String padre;
@@ -24,6 +25,14 @@ public class variablesMetodos {
 	
 	public String getNombre(){
 		return nombre;
+	}
+
+	public void setEncontro(Boolean found){
+		encontro = found;
+	}
+	
+	public Boolean getEncontro(){
+		return encontro;
 	}
 
 	public void setTipo(String type){

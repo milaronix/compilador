@@ -84,7 +84,7 @@ public class  Ast {
 		for(int i = 0; i< variables.size(); i++){
 			variablesMetodos coso;
 			coso = (variablesMetodos) variables.get(i);
-			System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Recibe "  + coso.getRecibe() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre());
+			System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Recibe "  + coso.getRecibe() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre() + " Encontro " + coso.getEncontro());
 		}
 
 	}
@@ -130,15 +130,6 @@ public class  Ast {
 						if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
 							numStr = numStr + t.getChild(i).toString().charAt(3);						}
 						System.out.println(numStr); //da el numero de la hash
-						/*try{
-							BufferedReader reader = new BufferedReader(new FileReader("/parser/DecafParser.java"));
-							String line = null;
-							while ((line = reader.readLine()) != null) {
-							    // ...
-							}
-						}catch(Exception e){
-							System.out.println("Error al leer");
-						}*/
 						if (tabla.get(Integer.parseInt(numStr)) == null ){
 							palabra = "---block---";
 						}else{
@@ -158,27 +149,7 @@ public class  Ast {
 					nodo2.setType(null);
 					astTree.add(nodo2);
 
-					if(palabra == "assign"){
-						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
-							variablesMetodos vm = new variablesMetodos();
-							
-							vm.setTipo(null);
-							String id = "";
-							String recibe = "";
-							String operacion = t.getChild(i).getText();
-
-							int index = operacion.indexOf('=');
-							id = operacion.substring(0,index);
-							recibe = operacion.substring(index+1,operacion.length()-1);
-
-							vm.setNombre(id);
-							vm.setRecibe(recibe);
-							vm.setPadre(t.getChild(i).toString());
-							variables.add(vm);
-						}
-					}
-
-					if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "method_decl") ){
+					if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "method_decl") || (palabra == "var_global_decl")){
 						if (t.getChild(i).getChild(0).toString().charAt(0) != '{'){
 							simbolo sim = new simbolo();
 							sim.setNombre(t.getChild(i).getChild(1).toString());
@@ -209,7 +180,36 @@ public class  Ast {
 							}
 
 							tablaSimbolos.add(sim);
-						}
+						}	
+						if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "var_global_decl")){
+	
+							String tipoA = t.getChild(i).getChild(0).toString();
+							String nombreA = t.getChild(i).getChild(1).toString();
+							for(int p=0; p < t.getChild(i).getChildCount();p = p + 1){
+								if(t.getChild(i).toString().length()>1){
+									System.out.println("THIS"+t.getChild(i).getChild(p).toString().substring(1,3));
+									if(t.getChild(i).getChild(p).toString().substring(1,3).equals("88")){
+										variablesMetodos vm = new variablesMetodos();
+										vm.setEncontro(true);
+										vm.setTipo(tipoA);
+										String id = "";
+										String recibe = "";
+										String operacion = t.getChild(i).getChild(p).getText();
+
+										int index = operacion.indexOf('=');
+										id = operacion.substring(0,index);
+										recibe = operacion.substring(index+1,operacion.length()-1);
+
+										vm.setNombre(id);
+										vm.setRecibe(recibe);
+										vm.setPadre(t.getChild(i).getChild(p).toString());
+										variables.add(vm);
+										
+									}
+								}
+							}
+														
+						}//cierra cond						
 					}
 				}
 			} 

@@ -58,7 +58,7 @@ public class Semantic {
 		
 	}
 
-	public boolean mismoBloque(String var, String papa){
+	public boolean mismoBloque(String var, String papa){ 
 		boolean mt = false;
 		int pos = 0;
 		while( ( mt == false ) && ( pos < ast.getTablaSimbolos().size() ) ){
@@ -105,5 +105,6 @@ public class Semantic {
 			}*/
 			//Revision de llamadas a metodos
  	}
-	
+
+
 }
