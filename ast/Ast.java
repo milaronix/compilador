@@ -71,6 +71,7 @@ public class  Ast {
 
 		printTree(tree,0);
 
+		System.out.println("");
 		System.out.println("*****************SIMBOLOS********************");
 		for(int i = 0; i< tablaSimbolos.size(); i++){
 			simbolo coso;
@@ -80,12 +81,14 @@ public class  Ast {
 
 		System.out.println("");
 
+		revisionTipos(tree);
 		System.out.println("*****************VARIABLES*******************");
 		for(int i = 0; i< variables.size(); i++){
 			variablesMetodos coso;
 			coso = (variablesMetodos) variables.get(i);
 			System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Recibe "  + coso.getRecibe() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre() + " Encontro " + coso.getEncontro());
 		}
+		System.out.println("");
 
 	}
 
@@ -112,6 +115,67 @@ public class  Ast {
 		tabla.put(41, "var_global_decl");
 		tabla.put(42, "var_global_decl");
 		//tabla.put(, "");
+	}
+
+	public void revisionTipos(ParseTree t){
+		for ( int i = 0; i < t.getChildCount(); i++ ){
+			String palabra = "";
+			crea_tabla();					
+			if ((t.getChild(i).toString().charAt(0) == '[') && (t.getChild(i).toString().length()>1)){
+				String numStr = "";
+				numStr = numStr + t.getChild(i).toString().charAt(1);
+				numStr = numStr + t.getChild(i).toString().charAt(2);
+				if (t.getChild(i).toString().charAt(3) != ']' && t.getChild(i).toString().charAt(3) != ' '){
+					numStr = numStr + t.getChild(i).toString().charAt(3);						
+				}
+				System.out.println(numStr); //da el numero de la hash
+				if (tabla.get(Integer.parseInt(numStr)) == null ){
+					palabra = "---block---";
+				}else{
+					palabra = tabla.get(Integer.parseInt(numStr)).toString();
+				}
+						
+			}else{
+				palabra = t.getChild(i).toString();
+			}
+			System.out.println("*"+palabra);
+			if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "var_global_decl")){
+	
+				String tipoA = t.getChild(i).getChild(0).toString();
+				String nombreA = t.getChild(i).getChild(1).toString();
+				System.out.println("nombre "+nombreA);
+
+							for(int p=0; p < t.getChild(i).getChildCount();p = p + 1){
+								System.out.println("THIS"+t.getChild(i).getChild(p).toString());
+								if(t.getChild(i).getChild(p).toString().length()>1){
+									//System.out.println("THIS"+t.getChild(p).toString().substring(1,3));
+									if(t.getChild(i).getChild(p).toString().substring(1,3).equals("88")){
+										variablesMetodos vm = new variablesMetodos();
+										vm.setEncontro(true);
+										vm.setTipo(tipoA);
+										String id = "";
+										String recibe = "";
+										String operacion = t.getChild(p).getText();
+										System.out.println(operacion);
+
+										int index = operacion.indexOf('=');
+										id = operacion.substring(0,index);
+										recibe = operacion.substring(index+1,operacion.length()-1);
+
+										vm.setNombre(id);
+										vm.setRecibe(recibe);
+										vm.setPadre(t.getChild(p).toString());
+										System.out.println("ESTOOOO"+nombreA+"ESTOOOO"+id+"ESTOOO");
+										if(nombreA.equals(id)){
+											variables.add(vm);
+										}
+										
+									}
+								}
+							}
+														
+			}//cierra cond
+		}			
 	}
 
 	public void printTree(ParseTree t, int indent) {
@@ -181,35 +245,7 @@ public class  Ast {
 
 							tablaSimbolos.add(sim);
 						}	
-						if((palabra == "var_decl") || (palabra == "field_decl") || (palabra == "var_global_decl")){
-	
-							String tipoA = t.getChild(i).getChild(0).toString();
-							String nombreA = t.getChild(i).getChild(1).toString();
-							for(int p=0; p < t.getChild(i).getChildCount();p = p + 1){
-								if(t.getChild(i).toString().length()>1){
-									System.out.println("THIS"+t.getChild(i).getChild(p).toString().substring(1,3));
-									if(t.getChild(i).getChild(p).toString().substring(1,3).equals("88")){
-										variablesMetodos vm = new variablesMetodos();
-										vm.setEncontro(true);
-										vm.setTipo(tipoA);
-										String id = "";
-										String recibe = "";
-										String operacion = t.getChild(i).getChild(p).getText();
-
-										int index = operacion.indexOf('=');
-										id = operacion.substring(0,index);
-										recibe = operacion.substring(index+1,operacion.length()-1);
-
-										vm.setNombre(id);
-										vm.setRecibe(recibe);
-										vm.setPadre(t.getChild(i).getChild(p).toString());
-										variables.add(vm);
-										
-									}
-								}
-							}
-														
-						}//cierra cond						
+									
 					}
 				}
 			} 
