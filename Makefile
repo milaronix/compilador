@@ -1,4 +1,4 @@
-make: Scanner.class DecafLexer.java DecafLexer.class CC4Parser.java DecafParser.java basevisitor.java ast/*.class semantic/*.class Compiler.class ejecuta
+make: Scanner.class DecafLexer.java DecafLexer.class CC4Parser.java DecafParser.java basevisitor.java ast/*.class semantic/*.class irt/*.class codegen/*.class Compiler.class ejecuta
 
 Scanner.java:
 	echo scanner
@@ -40,6 +40,12 @@ ast/*.class: ast/*.java
 
 semantic/*.class: semantic/*.java
 	javac semantic/*.java
+
+irt/*.class: irt/*.java
+	javac irt/*.java
+
+codegen/*.class: codegen/*.java
+	javac codegen/*.java
 
 Compiler.class: Compiler.java
 	javac Compiler.java

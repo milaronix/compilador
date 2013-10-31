@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import compiler.ast.Ast;
-import compiler.semantic.simbolo;
 
 import java.util.List;
 import java.util.*;
