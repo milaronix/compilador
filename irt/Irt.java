@@ -32,12 +32,11 @@ public class Irt {
 			System.out.println("Existen errores previos a esta fase <IRT>, corrijalos para poder continuar");
 		}else{
 			arch=archivoEntrada;
-		}
-
-		try{
-			start();
-		}catch(IOException e) {
-			e.printStackTrace();
+			try{
+				start();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		FileWriter escribir;
@@ -106,6 +105,12 @@ public class Irt {
 		System.out.println(branch);
 	}
 
+	public void armaFor (String etiqueta, String variable, String valor, String operacion, String op1, String op2){
+		crearEtiqueta(etiqueta, null);
+		cargarStack(variable, valor);
+		branch(operacion, op1, op2, "for");
+	}
+
 	public void branch (String operacion, String a, String b, String etiqueta){
 		String branch = "";
 		String reg1 = "";
@@ -118,7 +123,7 @@ public class Irt {
 		if (operacion.equals("<")){
 			branch = "blt $t0 $t1 " + etiqueta;
 		}
-		if (operacion.equals("=")){
+		if (operacion.equals("==")){
 			branch = "beq $t0 $t1 " + etiqueta;
 		}
 		System.out.println(branch);
@@ -139,14 +144,8 @@ public class Irt {
 	
 	public void start() throws IOException{
 		System.out.println("******************  IRT  **********************");		
-		/*branch(">","milton","uno", "salto");
-		operacion("+","resultado","op1", "op2");
-		leerReg("var_milton", "$t0");
-		System.out.println("cargar al stack");
-		cargarStack ("milton", "registro");*/
 
 		cambioArbolLista(semantic.ast.getAstTree());
-		
 	}
 
 	public void cambioArbolLista(ParseTree t){
@@ -157,7 +156,7 @@ public class Irt {
 				}else
 				if(t.getChild(i).toString().substring(1,3).equals("48")){ //method_decl
 					LinkedList<String> param = new LinkedList<String>();
-					for(int j = 2; j< t.getChild(i).getChildCount(); j++){
+					for(int j = 3; j< t.getChild(i).getChildCount()-2; j++){
 						param.add(t.getChild(i).getChild(j).toString());
 					}
 					crearEtiqueta(t.getChild(i).getChild(1).toString(), param);
@@ -172,7 +171,7 @@ public class Irt {
 						asignacion = t.getChild(i).getText().substring(0,t.getChild(i).getText().length()-1);
 					}
 					String id = asignacion.substring(0, asignacion.indexOf("="));
-					asignacion = asignacion.substring(asignacion.indexOf("="),asignacion.length());
+					asignacion = asignacion.substring(asignacion.indexOf("=")+1,asignacion.length());
 					cargarStack(id,asignacion);
 					cambioArbolLista((ParseTree)t.getChild(i));
 				}else
@@ -190,17 +189,17 @@ public class Irt {
 						if(condicion.indexOf(">")!=-1){
 							op = ">";
 							parte1 = condicion.substring(0,condicion.indexOf(">"));
-							parte2 = condicion.substring(condicion.indexOf(">"),condicion.length());
+							parte2 = condicion.substring(condicion.indexOf(">")+1,condicion.length());
 						}else
 						if(condicion.indexOf("<")!=-1){
 							op = "<";
 							parte1 = condicion.substring(0,condicion.indexOf("<"));
-							parte2 = condicion.substring(condicion.indexOf("<"),condicion.length());
+							parte2 = condicion.substring(condicion.indexOf("<")+1,condicion.length());
 						}else
-						if(condicion.indexOf(">")!=-1){
-							op = "=";
-							parte1 = condicion.substring(0,condicion.indexOf("="));
-							parte2 = condicion.substring(condicion.indexOf("="),condicion.length());
+						if(condicion.indexOf("==")!=-1){
+							op = "==";
+							parte1 = condicion.substring(0,condicion.indexOf("=="));
+							parte2 = condicion.substring(condicion.indexOf("==")+1,condicion.length());
 						}
 						branch(op,parte1,parte2,"if");
 						
@@ -212,7 +211,11 @@ public class Irt {
 						cambioArbolLista((ParseTree)t.getChild(i));
 					}else
 					if(t.getChild(i).getChild(0).toString().equals("return")){//return
-						retorno(t.getChild(i).getChild(1).getText().substring(0,t.getChild(i).getChild(1).getText().length()-1));
+						try{
+							retorno(t.getChild(i).getChild(1).getText());
+						}catch(Exception e){
+							System.out.println("");
+						}
 					}else
 					if(t.getChild(i).getChild(0).toString().substring(1,4).equals("112")){ //method_call
 						String nombreMetodo = t.getChild(i).getChild(0).getChild(0).toString();

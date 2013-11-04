@@ -150,9 +150,11 @@ public class Semantic {
 						}
 					}
 					if ( ( nombreIgual != -999 ) && ( otroNombre != -999 ) ){
-						if ( !( polimorfos( ast.getTablaSimbolos().get(nombreIgual).getParametros(), ast.getTablaSimbolos().get(otroNombre).getParametros()  ) ) ){
-							System.out.println("ERROR: El metodo "+ast.getTablaSimbolos().get(nombreIgual).getNombre()+" y "+ast.getTablaSimbolos().get(otroNombre).getNombre()+" son iguales, mismo nombre y mismos parametros.");
-							errores = errores + 1;
+						if( ast.getTablaSimbolos().get(nombreIgual).getTipo().equals(ast.getTablaSimbolos().get(otroNombre).getTipo())){
+							if ( !( polimorfos( ast.getTablaSimbolos().get(nombreIgual).getParametros(), ast.getTablaSimbolos().get(otroNombre).getParametros()  ) ) ){
+								System.out.println("ERROR: El metodo "+ast.getTablaSimbolos().get(nombreIgual).getNombre()+" y "+ast.getTablaSimbolos().get(otroNombre).getNombre()+" son iguales, mismo nombre, mismo tipo y mismos parametros.");
+								errores = errores + 1;
+							}
 						}
 					}
 				}

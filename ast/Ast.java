@@ -73,7 +73,7 @@ public class  Ast {
 	}
 
 	public void start() throws IOException{
-		try{
+		//try{
 			DecafLexer lexer = new DecafLexer(new ANTLRFileStream(arch));
 			CommonTokenStream ctsTokens = new CommonTokenStream (lexer);
 			DecafParser parser_ = new DecafParser(ctsTokens);
@@ -141,9 +141,9 @@ public class  Ast {
 				System.out.println("Nombre " + coso.getNombre() + " Tipo " + coso.getTipo() + " Recibe "  + coso.getRecibe() + " Parametros " + coso.getParametros() + " Papa " + coso.getPadre() + " Encontro " + coso.getEncontro());
 			}
 			System.out.println("");
-		}catch(Exception e){
+		/*}catch(Exception e){
 			System.out.println("Existen errores previos a esta fase <PARSER>, corrijalos para poder continuar");
-		}
+		}*/
 
 	}
 
@@ -185,7 +185,8 @@ public class  Ast {
 					vm.setNombre("el return de "+nombreA);
 					vm.setEncontro(true);
 					vm.setTipo(tipoA); //devolucion
-					vm.setRecibe(t.getChild(i).getText().substring(6,t.getChild(i).getText().length()-1));
+					try{vm.setRecibe(t.getChild(i).getText().substring(6,t.getChild(i).getText().length()-1));}
+					catch(Exception e){vm.setRecibe(t.getChild(i+1).getText());}
 					vm.setPadre(papi);
 					variables.add(vm);
 										
