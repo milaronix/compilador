@@ -50,125 +50,102 @@ public class Irt {
 		}
 	}
 
-	public void cargarStack (String cargar, String registro){
+	public void cargarStack (String variable, String valor){
 		String mensaje;
 		String posicion;
-		posicion = operacion("+","$sp");
-		cargarReg("cargar","$sp("+posicion+")"); 
-		mensaje = "Guardar offset: " + posicion + " en la tabla, se cargó: " + cargar;
+		operacion("+", "$sp", "$sp", "4");
+		System.out.println("Guardar el valor de $sp como el offset para " + variable + "\n Guardar en el stack " + valor + " que es el contenido de " + variable);
+	}
+
+	public void leerStack (String registroOff, String registroRecibe){	//ya
+		String mensaje;
+		mensaje = "Buscar el offset que esta en " + registroOff + " en el stack";
+		registroRecibe = "Valor en el stack";
 		System.out.println(mensaje);
+		cargarReg (registroOff , registroRecibe);
 	}
 
 	
-	public void cargarReg (String cargar, String registro){
+	public void cargarReg (String cargar, String registro){		//ya
 		String mensaje;
-		mensaje = "Sumar word al Stack\nGuardar offset a la tabla\nLoad de "+cargar+"en "+registro;
+		mensaje = "Load de " + cargar + " en "+ registro;
 		System.out.println(mensaje);
 	}
 
-	public void leerReg (String leer, String registro){
-		String mensaje;
-		mensaje = "Buscar el offset de "+ leer +"\nCargar el offset en $t0";
-		operacion("+","$sp");
-		System.out.println(mensaje);
+	public void retorno (String retorno){		//ya
+		System.out.println("Carga " + retorno + "en $v0");
+		cargarReg(retorno, "$v0");
+		System.out.println("Salta hacia donde apunta $ra\nj $ra");
 	}
 
-	public boolean branch (String operancion, String a, String b, String etiqueta){
-		String branch, reg1, reg2;
+	public void leerReg (String variable, String registro){		//ya
+		String mensaje;
+		mensaje = "Buscar el offset de "+ variable +" en la tabla\nY se guarda en " + registro ;
+		System.out.println(mensaje);
+		cargarReg("offset" , registro);
+		leerStack(registro, registro);
+	}
+
+	public void operacion (String operacion, String a, String b, String c){
+		String branch = "";
+		cargarReg(a, "$t2");
+		cargarReg(b, "$t0");
+		cargarReg(c, "$t1");
+		if (operacion.equals("+")){
+			branch = "add $t0 $t1 $t2";
+		}
+		if (operacion.equals("-")){
+			branch = "sub $t0 $t1 $t2";
+		}
+		if (operacion.equals("*")){
+			branch = "mul $t0 $t1 $t2";
+		}
+		if (operacion.equals("/")){
+			branch = "div $t0 $t1 $t2";
+		}
+		System.out.println(branch);
+	}
+
+	public void branch (String operacion, String a, String b, String etiqueta){
+		String branch = "";
+		String reg1 = "";
+		String reg2 = "";
 		cargarReg(a, "$t0");
 		cargarReg(b, "$t1");
 		if (operacion.equals(">")){
-			branch = "bgt " + reg1 + reg2 + etiqueta;
+			branch = "bgt $t0 $t1 " + etiqueta;
 		}
 		if (operacion.equals("<")){
-			branch = "blt " + reg1 + reg2 + etiqueta;
+			branch = "blt $t0 $t1 " + etiqueta;
 		}
 		if (operacion.equals("=")){
-			branch = "beq " + reg1 + reg2 + etiqueta;
+			branch = "beq $t0 $t1 " + etiqueta;
 		}
 		System.out.println(branch);
-	}	
+	}
+	
+	public void crearEtiqueta (String nombre, LinkedList<String> parametros){
+		System.out.println("Metodo " + nombre + " en etiqueta: " + nombre + ":");
+		if(parametros != null){
+			for(int i = 0; i < parametros.size(); i++){
+				cargarStack(parametros.get(i), "0");
+			}
+		}
+	}
+
+	public void salto (String etiqueta){
+		System.out.println("Salto hacia la etiqueta: " + etiqueta + "\n jal " + etiqueta);
+	}
 	
 	public void start() throws IOException{
-		
-		System.out.println("******************  IRT  **********************");
+		System.out.println("******************  IRT  **********************");		
+		/*branch(">","milton","uno", "salto");
+		operacion("+","resultado","op1", "op2");
+		leerReg("var_milton", "$t0");
+		System.out.println("cargar al stack");
+		cargarStack ("milton", "registro");*/
 
 		cambioArbolLista(semantic.ast.getAstTree());
-
-		for(int i = 0; i< listaPlana.size()-1; i++){
-			variablesMetodosIRT coso, coso2;
-			coso = (variablesMetodosIRT) listaPlana.get(i);
-			coso2 = (variablesMetodosIRT) listaPlana.get(i+1);
-			coso.setSigTrue(coso2);
-		}
-
-		System.out.println("");
-
-		for(int i = 0; i< listaPlana.size(); i++){
-			variablesMetodosIRT coso;
-			coso = (variablesMetodosIRT) listaPlana.get(i);
-			if(coso.getClase().equals("method") && !(coso.getTipo().equals("Fin method"))){
-				listaMetodos.add(coso);
-			}
-			if(coso.getClase().equals("method") && coso.getTipo().equals("Fin method")){
-				coso.setSigTrue(null);
-			}
-		}
-
-		for(int i = 0; i< listaMetodos.size(); i++){
-			variablesMetodosIRT coso;
-			coso = (variablesMetodosIRT) listaMetodos.get(i);
-			System.out.println("metodo: "+coso.getNombre());
-		}
-
-		//Lista final
-		System.out.println(listaPlana.size());
-		for(int i = 0; i< listaPlana.size(); i++){
-			variablesMetodosIRT coso, siguiente;
-			coso = (variablesMetodosIRT) listaPlana.get(i);
-			siguiente = coso.getSigTrue();
-			if(coso.getClase().equals("method_call")){//System.out.println("Entro a method call "+i);
-				for(int j = 0; j< listaMetodos.size(); j++){
-					variablesMetodosIRT cosoM;
-					cosoM = (variablesMetodosIRT) listaMetodos.get(j);
-					if(cosoM.getNombre().equals(coso.getNombre())){
-						boolean primero = false;
-						variablesMetodosIRT actual;
-						actual = cosoM;
-						while(!(actual.getSigTrue()==null)){
-							variablesMetodosIRT vm = new variablesMetodosIRT();
-							vm.setNombre(actual.getNombre());
-							vm.setTipo(actual.getTipo()); 
-							vm.setClase(actual.getClase());
-							vm.setInfo(actual.getInfo());
-							vm.setSigTrue(null);
-							vm.setSigFalse(null);
-							listaPlana.add(vm);
-							if(primero == false){
-								coso.setSigTrue(vm);
-								primero = true;
-							}
-							actual = actual.getSigTrue();
-						}
-						variablesMetodosIRT vm = new variablesMetodosIRT();
-						vm.setNombre(cosoM.getNombre());
-						vm.setTipo(cosoM.getTipo()); 
-						vm.setClase(cosoM.getClase());
-						vm.setInfo(cosoM.getInfo());
-						vm.setSigTrue(siguiente);
-						vm.setSigFalse(null);
-						listaPlana.add(vm);
-						
-					}
-				}
-			}
-		}
-	
-		variablesMetodosIRT actual = listaPlana.get(0);
-			while(!(actual.getSigTrue()==null)){
-				System.out.println("Nombre: "+actual.getNombre()+" Tipo: "+actual.getTipo()+" Clase: "+actual.getClase()+" Info: "+actual.getInfo());						
-				actual = actual.getSigTrue();
-			}
 		
 	}
 
@@ -176,121 +153,76 @@ public class Irt {
 		for ( int i = 0; i < t.getChildCount(); i++ ){
 			if(t.getChild(i).toString().length()>3){
 				if(t.getChild(i).toString().substring(1,3).equals("41") || t.getChild(i).toString().substring(1,3).equals("80")){ //var_decl
-					variablesMetodosIRT vm = new variablesMetodosIRT();
-					vm.setNombre(t.getChild(i).getChild(1).toString());
-					vm.setTipo(t.getChild(i).getChild(0).toString()); 
-					vm.setClase("var");
-					vm.setInfo(null);
-					vm.setSigTrue(null);
-					vm.setSigFalse(null);
-					listaPlana.add(vm);
-					//System.out.println("Nombre: "+vm.getNombre()+" Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
-							
+					cargarStack(t.getChild(i).getChild(1).toString(),"0");					
 				}else
 				if(t.getChild(i).toString().substring(1,3).equals("48")){ //method_decl
-					enMetodo = true;
-
-					variablesMetodosIRT vm = new variablesMetodosIRT();
-					vm.setNombre(t.getChild(i).getChild(1).toString());
-					vm.setTipo(t.getChild(i).getChild(0).toString()); 
-					vm.setClase("method");
-					vm.setInfo(null);
-					vm.setSigTrue(null);
-					vm.setSigFalse(null);
-					listaPlana.add(vm);
-					//System.out.println("Nombre: "+vm.getNombre()+" Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
+					LinkedList<String> param = new LinkedList<String>();
+					for(int j = 2; j< t.getChild(i).getChildCount(); j++){
+						param.add(t.getChild(i).getChild(j).toString());
+					}
+					crearEtiqueta(t.getChild(i).getChild(1).toString(), param);
 					
 					cambioArbolLista((ParseTree)t.getChild(i));
-
-					variablesMetodosIRT vmFin = new variablesMetodosIRT();
-					vmFin.setNombre(vm.getNombre());
-					vmFin.setTipo("Fin method"); 
-					vmFin.setClase("method");
-					vmFin.setInfo(null);
-					vmFin.setSigTrue(null);
-					vmFin.setSigFalse(null);
-					listaPlana.add(vmFin);
-					//System.out.println("Nombre: "+vmFin.getNombre()+" Tipo: "+vmFin.getTipo()+" Clase: "+vmFin.getClase());
-
-					enMetodo = false;
 				}else
 				if(t.getChild(i).toString().substring(1,3).equals("88")){ //assign
-					variablesMetodosIRT vm = new variablesMetodosIRT();
-					vm.setNombre(null);
-					vm.setTipo(null); 
-					vm.setClase("assign");
+					String asignacion;
 					if(t.getChild(i).getText().indexOf(",") != -1){
-						vm.setInfo(t.getChild(i).getText().substring(0,t.getChild(i).getText().indexOf(",")));
+						asignacion = t.getChild(i).getText().substring(0,t.getChild(i).getText().indexOf(","));
 					}else{
-						vm.setInfo(t.getChild(i).getText().substring(0,t.getChild(i).getText().length()-1));
+						asignacion = t.getChild(i).getText().substring(0,t.getChild(i).getText().length()-1);
 					}
-					vm.setSigTrue(null);
-					vm.setSigFalse(null);
-					listaPlana.add(vm);
-					//System.out.println("Info: "+vm.getInfo()+" Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
+					String id = asignacion.substring(0, asignacion.indexOf("="));
+					asignacion = asignacion.substring(asignacion.indexOf("="),asignacion.length());
+					cargarStack(id,asignacion);
 					cambioArbolLista((ParseTree)t.getChild(i));
 				}else
 				if(t.getChild(i).toString().equals("else")){//else
-						variablesMetodosIRT vm = new variablesMetodosIRT();
-						vm.setNombre(null);
-						vm.setTipo("condicion false"); 
-						vm.setClase("else");
-						vm.setInfo(null);
-						vm.setSigTrue(null);//end
-						vm.setSigFalse(null);
-						listaPlana.add(vm);
-						//System.out.println("Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
+						crearEtiqueta("else", null);
 						cambioArbolLista((ParseTree)t.getChild(i));
 				}else
 				if(t.getChild(i).toString().substring(1,3).equals("87")){ //statement
 					if(t.getChild(i).getChild(0).toString().equals("if")){//if
-						variablesMetodosIRT vm = new variablesMetodosIRT();
-						vm.setNombre(null);
-						vm.setTipo("condicion"); 
-						vm.setClase("if");
-						vm.setInfo(t.getChild(i).getChild(2).getText().substring(0,t.getChild(i).getChild(2).getText().length()));
-						vm.setSigTrue(null);//nodoBloque
-						vm.setSigFalse(null);//nodoBloqueElse
-						listaPlana.add(vm);
-						//System.out.println("Info: "+vm.getInfo()+" Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
+						String condicion ="";
+						String op ="";
+						String parte1 = "";
+						String parte2 = "";
+						condicion = t.getChild(i).getChild(2).getText().substring(0,t.getChild(i).getChild(2).getText().length());
+						if(condicion.indexOf(">")!=-1){
+							op = ">";
+							parte1 = condicion.substring(0,condicion.indexOf(">"));
+							parte2 = condicion.substring(condicion.indexOf(">"),condicion.length());
+						}else
+						if(condicion.indexOf("<")!=-1){
+							op = "<";
+							parte1 = condicion.substring(0,condicion.indexOf("<"));
+							parte2 = condicion.substring(condicion.indexOf("<"),condicion.length());
+						}else
+						if(condicion.indexOf(">")!=-1){
+							op = "=";
+							parte1 = condicion.substring(0,condicion.indexOf("="));
+							parte2 = condicion.substring(condicion.indexOf("="),condicion.length());
+						}
+						branch(op,parte1,parte2,"if");
+						
 						cambioArbolLista((ParseTree)t.getChild(i));
 					}else
 					if(t.getChild(i).getChild(0).toString().equals("for")){//for
-						variablesMetodosIRT vm = new variablesMetodosIRT();
-						vm.setNombre(null);
-						vm.setTipo(null); 
-						vm.setClase("for");
-						vm.setInfo(t.getChild(i).getText().substring(0,t.getChild(i).getText().length()));
-						vm.setSigTrue(null);//regresa
-						vm.setSigFalse(null);//fin
-						listaPlana.add(vm);
-						//System.out.println("Nombre: "+vm.getNombre()+" Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
+						crearEtiqueta("for",null);
+						//t.getChild(i).getText().substring(0,t.getChild(i).getText().length())
 						cambioArbolLista((ParseTree)t.getChild(i));
 					}else
 					if(t.getChild(i).getChild(0).toString().equals("return")){//return
-						variablesMetodosIRT vm = new variablesMetodosIRT();
-						vm.setNombre(null);
-						vm.setTipo(null); 
-						vm.setClase("return");
-						vm.setInfo(t.getChild(i).getChild(1).getText().substring(0,t.getChild(i).getChild(1).getText().length()-1));
-						vm.setSigTrue(null);//regresa
-						vm.setSigFalse(null);//fin
-						listaPlana.add(vm);
-						//System.out.println("Info: "+vm.getInfo()+" Tipo: "+vm.getTipo()+" Clase: "+vm.getClase());
+						retorno(t.getChild(i).getChild(1).getText().substring(0,t.getChild(i).getChild(1).getText().length()-1));
 					}else
 					if(t.getChild(i).getChild(0).toString().substring(1,4).equals("112")){ //method_call
-						//buscarMetodo y sustituir valores
 						String nombreMetodo = t.getChild(i).getChild(0).getChild(0).toString();
 						String parametros = t.getChild(i).getChild(0).getText().substring(0,t.getChild(i).getChild(0).getText().length()-2);
-						variablesMetodosIRT vm = new variablesMetodosIRT();
-						vm.setNombre(nombreMetodo);
-						vm.setTipo(null); 
-						vm.setClase("method_call");
-						vm.setInfo(parametros);
-						vm.setSigTrue(null);//regresa
-						vm.setSigFalse(null);//fin
-						listaPlana.add(vm);
-						//System.out.println("Tipo: "+vm.getTipo()+"Info: "+vm.getInfo()+" Clase: "+vm.getClase());
+						/*LinkedList<String> param = new LinkedList<String>;
+						for(int j = 2; j< t.getChild(i).getChildCount(); j++){
+							param.add(t.getChild(i).getChild(j));
+						}*/
+						System.out.println("PARAMETROS: "+parametros);
+						salto(nombreMetodo);
 					}else
 						cambioArbolLista((ParseTree)t.getChild(i));
 				}else
